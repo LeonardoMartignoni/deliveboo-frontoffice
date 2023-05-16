@@ -82,7 +82,7 @@ export default {
 <template>
   <div class="footer-content p-5">
     <div class="container">
-      <div class="row row-cols-4">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4 gy-lg-0">
         <div v-for="info in footerInfos" class="col">
           <div class="footer-detail-content h-100 p-4">
             <h5>{{ info.title }}</h5>
