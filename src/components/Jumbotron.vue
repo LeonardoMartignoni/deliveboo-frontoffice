@@ -20,8 +20,9 @@ export default {
     <div class="container">
       <div class="row row-cols-2">
         <div class="col">
-          <div class="jumbotron-content d-flex align-items-center text-white position-relative">
+          <div class="jumbotron-content d-flex justify-content-center text-white position-relative flex-column">
             <h1 class="fw-light">Piatti <span class="fw-bold text-decoration-underline">spaventosamente</span> buoni, a domicilio.</h1>
+            <a href="#our-restaurants" class="btn btn-outline-light rounded-pill w-25 mt-3">Ordina!</a>
           </div>
         </div>
         <div class="col">

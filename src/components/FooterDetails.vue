@@ -1,5 +1,5 @@
 <script>
-// import MyComponent from "./components/MyComponent.vue";
+import FooterCredits from "./partials/_FooterCredits.vue";
 
 export default {
   data() {
@@ -73,9 +73,9 @@ export default {
     };
   },
 
-  // components: {
-  //   MyComponent,
-  // },
+  components: {
+    FooterCredits,
+  },
 };
 </script>
 
@@ -99,6 +99,7 @@ export default {
       </div>
     </div>
   </div>
+  <FooterCredits />
 </template>
 
 <style lang="scss" scoped>

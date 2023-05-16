@@ -26,7 +26,7 @@ export default {
 </script>
 
 <template>
-  <div class="our-restaurants my-5">
+  <div id="our-restaurants" class="my-5">
     <div class="container">
       <h2 class="fs-1">I nostri ristoranti</h2>
 
