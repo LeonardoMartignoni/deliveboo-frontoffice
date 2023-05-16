@@ -1,6 +1,7 @@
 <script>
 import Navbar from "./components/Navbar.vue";
 import Jumbotron from "./components/Jumbotron.vue";
+import OurRestaurants from "./components/OurRestaurants.vue";
 
 export default {
   data() {
@@ -12,6 +13,7 @@ export default {
   components: {
     Navbar,
     Jumbotron,
+    OurRestaurants,
   },
 };
 </script>
@@ -19,6 +21,9 @@ export default {
 <template>
   <Navbar class="navbar-component" />
   <Jumbotron />
+  <main>
+    <OurRestaurants />
+  </main>
 </template>
 
 <style lang="scss">
@@ -36,5 +41,9 @@ body {
 
 .navbar-component {
   z-index: 100;
+}
+
+input[type="text"]:focus {
+  outline: 2px solid $primary;
 }
 </style>
