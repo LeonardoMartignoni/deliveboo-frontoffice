@@ -18,14 +18,17 @@ export default {
   <div class="jumbotron position-relative">
     <img class="position-absolute w-100" src="/images/jumbotron-overlay.png" />
     <div class="container">
-      <div class="row row-cols-2">
+      <div class="row row-cols-1 row-cols-lg-2">
         <div class="col">
           <div class="jumbotron-content d-flex justify-content-center text-white position-relative flex-column">
-            <h1 class="fw-light">Piatti <span class="fw-bold text-decoration-underline">spaventosamente</span> buoni, a domicilio.</h1>
+            <h1 class="fw-light">
+              Piatti <span class="fw-bold text-decoration-underline">spaventosamente</span> buoni, <br class="d-block d-lg-none d-xxl-block" />
+              a domicilio.
+            </h1>
             <a href="#our-restaurants" class="btn btn-outline-light rounded-pill w-25 mt-3">Ordina!</a>
           </div>
         </div>
-        <div class="col">
+        <div class="col d-none d-lg-block">
           <div class="jumbotron-content d-flex justify-content-center flex-shrink-0">
             <img class="position-relative img-fluid" src="/images/driver.png" />
           </div>
