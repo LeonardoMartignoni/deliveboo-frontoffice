@@ -3,11 +3,12 @@ import Navbar from "./components/Navbar.vue";
 import Jumbotron from "./components/Jumbotron.vue";
 import OurRestaurants from "./components/OurRestaurants.vue";
 import FooterDetails from "./components/FooterDetails.vue";
+import MenuLayover from "./components/partials/_MenuLayover.vue";
 
 export default {
   data() {
     return {
-      // title: "Hello World",
+      isMenuOn: false,
     };
   },
 
@@ -16,12 +17,23 @@ export default {
     Jumbotron,
     OurRestaurants,
     FooterDetails,
+    MenuLayover,
+  },
+
+  methods: {
+    toggleMenu() {
+      this.isMenuOn = !this.isMenuOn;
+    },
   },
 };
 </script>
 
 <template>
-  <Navbar class="navbar-component" />
+  <div v-if="isMenuOn">
+    <MenuLayover @toggle-menu="toggleMenu()" />
+  </div>
+
+  <Navbar class="navbar-component" @toggle-menu="toggleMenu()" />
   <Jumbotron />
   <main>
     <OurRestaurants />
@@ -43,11 +55,29 @@ body {
   font-family: "IBM Plex Sans", sans-serif;
 }
 
+ul {
+  li {
+    list-style: none;
+  }
+}
+
 .navbar-component {
-  z-index: 100;
+  z-index: 10;
 }
 
 input[type="text"]:focus {
   outline: 2px solid $primary;
+}
+
+.menu-layover {
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+
+  .menu-layover-content {
+    background-color: white;
+    height: 100vh;
+  }
 }
 </style>

@@ -111,8 +111,6 @@ export default {
 
   ul {
     li {
-      list-style: none;
-
       img {
         height: 40px;
       }

@@ -21,15 +21,10 @@ export default {
         <a class="navbar-brand" href="#">
           <img src="/images/logo-white.svg" alt="Bootstrap" class="img-fluid" />
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="btn border-0 d-block d-lg-none" @click="$emit('toggle-menu')">
+          <i class="bi bi-list fs-1 text-white"></i>
         </button>
-        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
-          <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-          </ul> -->
+        <div class="collapse navbar-collapse flex-grow-0">
           <ul class="list-group d-flex flex-row gap-3">
             <li>
               <a href="#" class="btn btn-light rounded-pill px-4">Accedi</a>
@@ -49,11 +44,5 @@ export default {
 
 .navbar-brand > img {
   height: $nav-height;
-}
-
-ul {
-  li {
-    list-style: none;
-  }
 }
 </style>
