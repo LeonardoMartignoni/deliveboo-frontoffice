@@ -63,7 +63,7 @@ export default {
 
         <!-- Restaurants List -->
         <div class="col-12 col-lg-9">
-          <div class="row row-cols-3 gy-4">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gy-4">
             <div v-for="restaurant in restaurantList" class="col">
               <div class="border border-1 custom-border">
                 <img class="restaurant-thumbnail img-fluid" :src="restaurant.thumbnail" />
