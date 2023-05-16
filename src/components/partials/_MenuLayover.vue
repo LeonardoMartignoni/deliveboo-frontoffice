@@ -47,4 +47,16 @@ export default {
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.menu-layover {
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+
+  .menu-layover-content {
+    background-color: white;
+    height: 100vh;
+  }
+}
+</style>

@@ -62,22 +62,10 @@ ul {
 }
 
 .navbar-component {
-  z-index: 10;
+  z-index: 1;
 }
 
 input[type="text"]:focus {
   outline: 2px solid $primary;
-}
-
-.menu-layover {
-  background-color: rgba($color: #000000, $alpha: 0.5);
-  width: 100vw;
-  height: 100vh;
-  z-index: 100;
-
-  .menu-layover-content {
-    background-color: white;
-    height: 100vh;
-  }
 }
 </style>
