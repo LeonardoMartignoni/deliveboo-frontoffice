@@ -30,10 +30,9 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap");
 @import "./styles/partials/variables";
 
-// * {
-//   // debug
-//   border: 1px solid green;
-// }
+::selection {
+  background-color: #ff8e32;
+}
 
 body {
   font-family: "IBM Plex Sans", sans-serif;

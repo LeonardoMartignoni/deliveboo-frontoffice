@@ -50,7 +50,7 @@ export default {
     transform: translateY(10%);
     & > img {
       margin-top: auto;
-      width: 80%;
+      max-width: 80%;
     }
   }
 }

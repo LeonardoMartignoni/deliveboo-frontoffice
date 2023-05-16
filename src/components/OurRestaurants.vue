@@ -26,14 +26,14 @@ export default {
 </script>
 
 <template>
-  <div class="our-restaurants mt-5">
+  <div class="our-restaurants my-5">
     <div class="container">
       <h2 class="fs-1">I nostri ristoranti</h2>
 
       <div class="row mt-5">
         <!-- Advanced search -->
         <div class="col-3">
-          <div class="border border-1 p-3 d-flex flex-column h-100">
+          <div class="border border-1 p-3 d-flex flex-column h-100 custom-border">
             <h5>Ricerca avanzata</h5>
 
             <div class="input-fields mt-1">
@@ -61,7 +61,7 @@ export default {
         <div class="col-9">
           <div class="row row-cols-3 gy-4">
             <div v-for="restaurant in restaurantList" class="col">
-              <div class="border border-1 restaurant-border">
+              <div class="border border-1 custom-border">
                 <img class="restaurant-thumbnail img-fluid" :src="restaurant.thumbnail" />
 
                 <!-- Restaurant details -->
@@ -86,7 +86,7 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/partials/variables";
 
-.restaurant-border {
+.custom-border {
   border-radius: 5px;
 }
 
