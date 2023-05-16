@@ -2,6 +2,7 @@
 import Navbar from "./components/Navbar.vue";
 import Jumbotron from "./components/Jumbotron.vue";
 import OurRestaurants from "./components/OurRestaurants.vue";
+import FooterDetails from "./components/FooterDetails.vue";
 
 export default {
   data() {
@@ -14,6 +15,7 @@ export default {
     Navbar,
     Jumbotron,
     OurRestaurants,
+    FooterDetails,
   },
 };
 </script>
@@ -24,6 +26,9 @@ export default {
   <main>
     <OurRestaurants />
   </main>
+  <footer>
+    <FooterDetails />
+  </footer>
 </template>
 
 <style lang="scss">
