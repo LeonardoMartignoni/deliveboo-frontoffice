@@ -50,7 +50,7 @@ export default {
 
             <div class="restaurant-type-filter d-flex flex-column gap-1">
               <div class="row">
-                <div class="col-3 col-lg-12" v-for="typology in restaurantTypes">
+                <div class="col-6 col-sm-3 col-lg-12" v-for="typology in restaurantTypes">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" :id="typology.toLowerCase()" />
                     <label class="form-check-label" :for="typology.toLowerCase()"> {{ typology }} </label>

@@ -16,7 +16,7 @@ export default {
 
 <template>
   <div class="container position-relative">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary position-absolute w-100">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary position-absolute w-100 start-0">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="/images/logo-white.svg" alt="Bootstrap" class="img-fluid" />
