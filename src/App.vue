@@ -1,21 +1,34 @@
 <script>
-// import MyComponent from './components/MyComponent.vue'
+import Navbar from "./components/Navbar.vue";
 
 export default {
   data() {
     return {
-      title: "Hello World",
+      // title: "Hello World",
     };
   },
 
-  // components: {
-  // MyComponent,
-  // },
+  components: {
+    Navbar,
+  },
 };
 </script>
 
 <template>
-  <h1 class="text-danger">{{ title }}</h1>
+  <div class="container">
+    <Navbar />
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;400;500;600;700&display=swap");
+
+* {
+  border: 1px solid green;
+}
+
+body {
+  font-family: "IBM Plex Sans", sans-serif;
+  background-color: black; //debug
+}
+</style>
