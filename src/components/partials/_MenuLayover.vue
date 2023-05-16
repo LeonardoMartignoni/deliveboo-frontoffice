@@ -58,5 +58,11 @@ export default {
     background-color: white;
     height: 100vh;
   }
+
+  .btn-outline-primary {
+    &:hover {
+      color: white;
+    }
+  }
 }
 </style>
