@@ -32,7 +32,7 @@ export default {
 
       <div class="row mt-5">
         <!-- Advanced search -->
-        <div class="col-3">
+        <div class="col-12 col-lg-3 mb-5 mb-lg-0">
           <div class="border border-1 p-3 d-flex flex-column h-100 custom-border">
             <h5>Ricerca avanzata</h5>
 
@@ -49,16 +49,20 @@ export default {
             <h5 class="mt-4">Ricerca avanzata</h5>
 
             <div class="restaurant-type-filter d-flex flex-column gap-1">
-              <div class="form-check" v-for="typology in restaurantTypes">
-                <input class="form-check-input" type="checkbox" value="" :id="typology.toLowerCase()" />
-                <label class="form-check-label" :for="typology.toLowerCase()"> {{ typology }} </label>
+              <div class="row">
+                <div class="col-3 col-lg-12" v-for="typology in restaurantTypes">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" :id="typology.toLowerCase()" />
+                    <label class="form-check-label" :for="typology.toLowerCase()"> {{ typology }} </label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Restaurants List -->
-        <div class="col-9">
+        <div class="col-12 col-lg-9">
           <div class="row row-cols-3 gy-4">
             <div v-for="restaurant in restaurantList" class="col">
               <div class="border border-1 custom-border">
