@@ -1,33 +1,38 @@
 <script>
-// import MyComponent from "./components/MyComponent.vue";
+import axios from "axios";
 
 export default {
   data() {
     return {
       restaurantTypes: ["Italiano", "Americano", "Cinese", "Giapponese", "Messicano", "Indiano", "Pesce", "Carne", "Pizza", "Sushi", "Vegana"],
-      restaurantList: [
-        { thumbnail: "/images/restaurants_example/1.jpg", types: ["Italiano"], name: "Ristorante da Mario" },
-        { thumbnail: "/images/restaurants_example/2.jpg", types: ["Americano"], name: "Steakhouse Roadhouse" },
-        { thumbnail: "/images/restaurants_example/3.jpg", types: ["Cinese"], name: "Tempio del Dragone" },
-        { thumbnail: "/images/restaurants_example/4.jpg", types: ["Giapponese"], name: "Sushi Samurai" },
-        { thumbnail: "/images/restaurants_example/5.jpg", types: ["Messicano", "Carne"], name: "El Mariachi" },
-        { thumbnail: "/images/restaurants_example/6.jpg", types: ["Indiano", "Pesce", "Italiano"], name: "Taj Mahal" },
-        { thumbnail: "/images/restaurants_example/7.jpg", types: ["Pesce", "Italiano"], name: "Mare e Monti" },
-        { thumbnail: "/images/restaurants_example/8.jpg", types: ["Carne", "Italiano"], name: "La Brace" },
-        { thumbnail: "/images/restaurants_example/9.jpg", types: ["Pizza", "Italiano"], name: "Pizzeria Napoli" },
-      ],
+      restaurants: [],
     };
   },
 
-  // components: {
-  //   MyComponent,
-  // },
+  methods: {
+    fetchRestaurants(endpoint = null) {
+      if (!endpoint) endpoint = "http://127.0.0.1:8000/api/restaurants";
+
+      axios.get(endpoint).then((response) => {
+        this.restaurants.data = response.data.results.data;
+        this.restaurants.pages = response.data.results.links;
+        console.log(response);
+      });
+    },
+  },
+
+  created() {
+    this.fetchRestaurants();
+  },
 };
 </script>
 
 <template>
   <div id="our-restaurants" class="my-5">
     <div class="container">
+      <!-- Debug -->
+      <button class="btn btn-primary" @click="fetchRestaurants()">Debug</button>
+
       <h2 class="fs-1">I nostri ristoranti</h2>
 
       <div class="row mt-5">
@@ -64,16 +69,16 @@ export default {
         <!-- Restaurants List -->
         <div class="col-12 col-lg-9">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gy-4">
-            <div v-for="restaurant in restaurantList" class="col">
+            <div v-for="restaurant in restaurants.data" class="col">
               <div class="border border-1 custom-border">
-                <img class="restaurant-thumbnail img-fluid" :src="restaurant.thumbnail" />
+                <img class="restaurant-thumbnail img-fluid" :src="restaurant.photo" />
 
                 <!-- Restaurant details -->
                 <div class="restaurant-details p-3">
                   <h5 class="m-0">{{ restaurant.name }}</h5>
                   <div class="mb-2 mt-1">
-                    <span class="restaurant-type">
-                      {{ restaurant.types.join(" - ") }}
+                    <span v-for="typology in restaurant.types" class="restaurant-type">
+                      {{ typology.name }}
                     </span>
                   </div>
                   <a class="btn btn-primary rounded-pill text-white w-100" href="#">Menù</a>
@@ -83,6 +88,23 @@ export default {
           </div>
         </div>
       </div>
+
+      <nav aria-label="Project pagination">
+        <ul class="pagination my-3">
+          <li v-for="page in restaurants.pages" class="page-item">
+            <button
+              type="button"
+              class="page-link"
+              @click="fetchRestaurants(page.url)"
+              :class="{
+                disabled: !page.url,
+                active: page.active,
+              }"
+              v-html="page.label"
+            ></button>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
