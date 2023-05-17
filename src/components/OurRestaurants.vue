@@ -77,7 +77,7 @@ export default {
                 <div class="restaurant-details p-3">
                   <h5 class="m-0">{{ restaurant.name }}</h5>
                   <div class="mb-2 mt-1">
-                    <span v-for="typology in restaurant.types" class="restaurant-type">
+                    <span v-for="(typology, index) in restaurant.types" class="restaurant-type">
                       {{ typology.name }}
                     </span>
                   </div>
@@ -124,6 +124,9 @@ export default {
 
 .restaurant-type {
   font-size: 0.9rem;
+  &:not(:last-of-type)::after {
+    content: " - ";
+  }
 }
 
 .restaurant-details {
