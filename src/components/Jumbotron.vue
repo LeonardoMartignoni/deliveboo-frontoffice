@@ -1,31 +1,36 @@
 <script>
-// import MyComponent from "./components/MyComponent.vue";
+import { store } from "../store/store";
 
 export default {
   data() {
     return {
-      // title: "Hello world"
+      store,
     };
   },
 
-  // components: {
-  //   MyComponent,
-  // },
+  props: {
+    jumbotronPicPath: String,
+    title: String,
+  },
 };
 </script>
 
 <template>
   <div class="jumbotron position-relative">
-    <img class="position-absolute w-100" src="/images/jumbotron-overlay.png" />
+    <img class="position-absolute w-100" :src="jumbotronPicPath" />
     <div class="container">
       <div class="row row-cols-1 row-cols-lg-2">
         <div class="col">
           <div class="jumbotron-content d-flex justify-content-center text-white position-relative flex-column">
-            <h1 class="fw-light">
-              Piatti <span class="fw-bold text-decoration-underline">spaventosamente</span> buoni, <br class="d-block d-lg-none d-xxl-block" />
-              a domicilio.
-            </h1>
-            <a href="#our-restaurants" class="btn btn-outline-light rounded-pill w-25 mt-3">Ordina!</a>
+            <div v-if="store.jumbotronTitle == store.jumbotronDefaultTitle">
+              <h1 class="fw-light" v-html="title"></h1>
+              <a href="#our-restaurants" class="btn btn-outline-light rounded-pill w-25 mt-3">Ordina!</a>
+            </div>
+            <div v-else class="d-flex flex-column">
+              <span class="text-uppercase title-menu">Menù</span>
+              <h1>{{ title }}</h1>
+              <p class="fw-light mb-0 restaurant-description">{{ store.jumbotronRestaurantDescription }}</p>
+            </div>
           </div>
         </div>
         <div class="col d-none d-lg-block">
@@ -55,6 +60,14 @@ export default {
     & > img {
       margin-top: auto;
       max-width: 80%;
+    }
+
+    .title-menu {
+      letter-spacing: 0.3rem;
+    }
+
+    .restaurant-description {
+      font-size: 0.9rem;
     }
   }
 }

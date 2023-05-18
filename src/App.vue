@@ -1,4 +1,6 @@
 <script>
+import { store } from "./store/store";
+
 import Navbar from "./components/Navbar.vue";
 import Jumbotron from "./components/Jumbotron.vue";
 import OurRestaurants from "./pages/OurRestaurants.vue";
@@ -8,7 +10,9 @@ import MenuLayover from "./components/partials/_MenuLayover.vue";
 export default {
   data() {
     return {
+      store,
       isMenuOn: false,
+      jumbotronPicPath: store.jumbotronPicPath,
     };
   },
 
@@ -24,6 +28,17 @@ export default {
     toggleMenu() {
       this.isMenuOn = !this.isMenuOn;
     },
+
+    changeJumbotronPic(data) {
+      this.jumbotronPicPath = data;
+    },
+  },
+
+  watch: {
+    $route(to, from) {
+      this.jumbotronPicPath = "/images/jumbotron-overlay.png";
+      this.store.jumbotronTitle = this.store.jumbotronDefaultTitle;
+    },
   },
 };
 </script>
@@ -34,11 +49,9 @@ export default {
   </div>
 
   <Navbar class="navbar-component" @toggle-menu="toggleMenu()" />
-  <Jumbotron />
+  <Jumbotron :jumbotronPicPath="jumbotronPicPath" :title="store.jumbotronTitle" />
   <main>
-
-    <router-view> </router-view>
-    <!-- <OurRestaurants />  -->
+    <router-view @change-jumbotron-pic="changeJumbotronPic"> </router-view>
   </main>
   <footer>
     <FooterDetails />

@@ -1,17 +1,29 @@
 <script>
-// import MyComponent from "./components/MyComponent.vue";
 import axios from "axios";
+import { store } from "../store/store";
 
 export default {
   data() {
     return {
+      store,
       restaurant: {},
+      restaurantPic: null,
     };
+  },
+
+  methods: {
+    changeJumbotron() {
+      this.$emit("change-jumbotron-pic", this.restaurantPic);
+    },
   },
 
   created() {
     axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
       this.restaurant = response.data.results;
+      this.restaurantPic = this.restaurant.photo;
+      this.store.jumbotronTitle = this.restaurant.name;
+      this.store.jumbotronRestaurantDescription = this.restaurant.description;
+      this.changeJumbotron();
     });
   },
 };
@@ -19,8 +31,6 @@ export default {
 
 <template>
   <div class="container my-5">
-    <h2 class="fs-1">{{ restaurant.name }}</h2>
-
     <div class="row mt-5">
       <div class="col-12">
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 gy-4">
