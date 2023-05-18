@@ -39,7 +39,7 @@ export default {
         <!-- Advanced search -->
         <div class="col-12 col-lg-3 mb-5 mb-lg-0">
           <div class="border border-1 p-3 d-flex flex-column h-100 custom-border">
-            <h5>Ricerca avanzata</h5>
+            <!-- <h5>Ricerca avanzata</h5>
 
             <div class="input-fields mt-1">
               <form action="" method="get" class="d-flex gap-2">
@@ -48,10 +48,10 @@ export default {
                   <i class="bi bi-search"></i>
                 </button>
               </form>
-            </div>
+            </div> -->
 
             <!-- Restaurant type filter -->
-            <h5 class="mt-4">Ricerca avanzata</h5>
+            <h5 class="">Filtra</h5>
 
             <div class="restaurant-type-filter d-flex flex-column gap-1">
               <div class="row">
