@@ -31,9 +31,6 @@ export default {
 <template>
   <div id="our-restaurants" class="my-5">
     <div class="container">
-      <!-- Debug -->
-      <button class="btn btn-primary" @click="fetchRestaurants()">Debug</button>
-
       <h2 class="fs-1">I nostri ristoranti</h2>
 
       <div class="row mt-5">
@@ -71,19 +68,18 @@ export default {
         <div class="col-12 col-lg-9">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gy-4">
             <div v-for="restaurant in restaurants.data" class="col">
-              <div class="border border-1 custom-border">
+              <div class="border border-1 custom-border h-100 d-flex flex-column">
                 <img class="restaurant-thumbnail img-fluid" :src="restaurant.photo" />
 
                 <!-- Restaurant details -->
-                <div class="restaurant-details p-3">
+                <div class="restaurant-details p-3 d-flex flex-column flex-grow-1">
                   <h5 class="m-0">{{ restaurant.name }}</h5>
                   <div class="mb-2 mt-1">
                     <span v-for="(typology, index) in restaurant.types" class="restaurant-type">
                       {{ typology.name }}
                     </span>
                   </div>
-                  <router-link :to="{ name: 'menu-detail', params: { id: restaurant.id } }"
-                    class="btn btn-primary rounded-pill text-white w-100">Menù</router-link>
+                  <router-link :to="{ name: 'menu-detail', params: { id: restaurant.id } }" class="btn btn-primary rounded-pill text-white w-100 mt-auto mb-0">Menù</router-link>
                 </div>
               </div>
             </div>
@@ -94,10 +90,16 @@ export default {
       <nav aria-label="Project pagination">
         <ul class="pagination my-3">
           <li v-for="page in restaurants.pages" class="page-item">
-            <button type="button" class="page-link" @click="fetchRestaurants(page.url)" :class="{
-              disabled: !page.url,
-              active: page.active,
-            }" v-html="page.label"></button>
+            <button
+              type="button"
+              class="page-link"
+              @click="fetchRestaurants(page.url)"
+              :class="{
+                disabled: !page.url,
+                active: page.active,
+              }"
+              v-html="page.label"
+            ></button>
           </li>
         </ul>
       </nav>
