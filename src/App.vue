@@ -1,7 +1,7 @@
 <script>
 import Navbar from "./components/Navbar.vue";
 import Jumbotron from "./components/Jumbotron.vue";
-import OurRestaurants from "./components/OurRestaurants.vue";
+import OurRestaurants from "./pages/OurRestaurants.vue";
 import FooterDetails from "./components/FooterDetails.vue";
 import MenuLayover from "./components/partials/_MenuLayover.vue";
 
