@@ -36,7 +36,7 @@ export default {
                     {{ dish.description }}
                   </span>
                 </div>
-                <h6 class="dish-price mt-auto mb-0">€{{ dish.price }}</h6>
+                <h6 class="dish-price mt-auto mb-0">€{{ dish.price.toFixed(2).replace(".", ",") }}</h6>
               </div>
             </div>
           </div>

@@ -87,8 +87,8 @@ export default {
         </div>
       </div>
 
-      <nav aria-label="Project pagination">
-        <ul class="pagination my-3">
+      <nav class="d-flex" aria-label="restaurants pagination">
+        <ul class="pagination ms-auto my-3">
           <li v-for="page in restaurants.pages" class="page-item">
             <button
               type="button"
