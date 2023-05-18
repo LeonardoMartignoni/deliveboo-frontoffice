@@ -36,9 +36,9 @@ export default {
   <Navbar class="navbar-component" @toggle-menu="toggleMenu()" />
   <Jumbotron />
   <main>
-    <router-view>
-      <OurRestaurants />
-    </router-view>
+
+    <router-view> </router-view>
+    <!-- <OurRestaurants />  -->
   </main>
   <footer>
     <FooterDetails />

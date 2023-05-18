@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import MenuDetail from "./MenuDetail.vue";
 
 export default {
   data() {
@@ -16,7 +17,7 @@ export default {
       axios.get(endpoint).then((response) => {
         this.restaurants.data = response.data.results.data;
         this.restaurants.pages = response.data.results.links;
-        console.log(response);
+        // console.log(response);
       });
     },
   },
@@ -81,7 +82,8 @@ export default {
                       {{ typology.name }}
                     </span>
                   </div>
-                  <a class="btn btn-primary rounded-pill text-white w-100" href="#">Menù</a>
+                  <router-link :to="{ name: 'menu-detail', params: { id: restaurant.id } }"
+                    class="btn btn-primary rounded-pill text-white w-100">Menù</router-link>
                 </div>
               </div>
             </div>
@@ -92,16 +94,10 @@ export default {
       <nav aria-label="Project pagination">
         <ul class="pagination my-3">
           <li v-for="page in restaurants.pages" class="page-item">
-            <button
-              type="button"
-              class="page-link"
-              @click="fetchRestaurants(page.url)"
-              :class="{
-                disabled: !page.url,
-                active: page.active,
-              }"
-              v-html="page.label"
-            ></button>
+            <button type="button" class="page-link" @click="fetchRestaurants(page.url)" :class="{
+              disabled: !page.url,
+              active: page.active,
+            }" v-html="page.label"></button>
           </li>
         </ul>
       </nav>
@@ -124,6 +120,7 @@ export default {
 
 .restaurant-type {
   font-size: 0.9rem;
+
   &:not(:last-of-type)::after {
     content: " - ";
   }
