@@ -66,7 +66,7 @@ export default {
 
                   <!-- Quantity and cart -->
                   <div class="buttons-cart d-flex flex-column flex-lg-row gap-3">
-                    <div class="d-flex justify-content-between align-items-center flex-grow-1 w-md-100 rounded-pill quantity-button">
+                    <div class="d-flex justify-content-between align-items-center w-100 rounded-pill quantity-button">
                       <button id="quantity-decrease" class="btn p-0 py-1 py-lg-0 border-0" @click="decreaseDishCounter()">
                         <i class="bi bi-dash-lg text-primary px-3"></i>
                       </button>
@@ -75,7 +75,7 @@ export default {
                         <i class="bi bi-plus-lg text-primary px-3"></i>
                       </button>
                     </div>
-                    <button class="btn btn-primary rounded-pill text-white flex-grow-1 w-md-100" @click="addItemToCart()">Aggiungi per {{ (store.currentDish.price * dishCounter).toFixed(2).replace(".", ",") }}</button>
+                    <button class="btn btn-primary rounded-pill text-white w-100" @click="addItemToCart()">Aggiungi per {{ (store.currentDish.price * dishCounter).toFixed(2).replace(".", ",") }}</button>
                   </div>
                 </div>
               </div>

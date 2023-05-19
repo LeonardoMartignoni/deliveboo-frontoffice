@@ -68,6 +68,9 @@ export default {
                         </button>
                       </div>
                     </div>
+
+                    <!-- Checkout button -->
+                    <button class="btn btn-primary text-white w-100 rounded-pill">Vai al pagamento</button>
                   </div>
 
                   <div v-else class="cart-empty text-center p-3">
@@ -104,7 +107,7 @@ export default {
     object-fit: cover;
   }
 
-  .cart-item:not(:last-child) {
+  .cart-item {
     margin-bottom: 1rem;
   }
 }
