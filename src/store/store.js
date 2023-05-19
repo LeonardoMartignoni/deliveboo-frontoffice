@@ -10,4 +10,9 @@ export const store = reactive({
   // Dishes
   isDishLayoverOn: false,
   currentDish: {},
+
+  // Cart
+  cartItems: [],
+
+  isCartOpen: false,
 });

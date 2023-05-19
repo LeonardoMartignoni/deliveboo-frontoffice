@@ -38,6 +38,7 @@ export default {
     selectDish(dish) {
       this.store.currentDish = dish;
       this.store.isDishLayoverOn = true;
+      this.store.isCartOpen = false;
     },
   },
 

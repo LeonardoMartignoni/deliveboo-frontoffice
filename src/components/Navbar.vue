@@ -1,16 +1,12 @@
 <script>
-// import MyComponent from "./components/MyComponent.vue";
+import { store } from "../store/store";
 
 export default {
   data() {
     return {
-      // title: "Hello world",
+      store,
     };
   },
-
-  // components: {
-  //   MyComponent,
-  // },
 };
 </script>
 
@@ -32,6 +28,42 @@ export default {
             <li>
               <a href="#" class="btn btn-light rounded-pill px-4">Registrati</a>
             </li>
+            <li>
+              <button class="btn btn-light rounded-pill px-4" @click="store.isCartOpen = !store.isCartOpen">
+                <i class="bi bi-cart2"></i>
+              </button>
+
+              <!-- Cart details -->
+              <Transition>
+                <div v-if="store.isCartOpen" class="cart-details position-absolute rounded-3">
+                  <h6 class="fw-bold p-3 m-0">Carrello</h6>
+                  <hr class="m-0" />
+
+                  <div v-for="item in store.cartItems" class="cart-items-list p-3">
+                    <div class="cart-item d-flex">
+                      <!-- Item image -->
+                      <img :src="item.itemImage" class="cart-image img-fluid" />
+
+                      <!-- Item details -->
+                      <div class="cart-product-details d-flex flex-column ms-2">
+                        <span class="d-block">{{ item.itemName }}</span>
+
+                        <!-- Item prices -->
+                        <div class="cart-product-prices d-flex">
+                          <span>€{{ item.itemPrice }} x {{ item.itemQuantity }}</span>
+                          <span class="ms-2 text-primary fw-bold"> €{{ item.itemTotalPrice }}</span>
+                        </div>
+                      </div>
+
+                      <!-- Item remove from cart -->
+                      <button class="btn border-0 ms-auto">
+                        <i class="bi bi-trash3"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Transition>
+            </li>
           </ul>
         </div>
       </div>
@@ -44,5 +76,35 @@ export default {
 
 .navbar-brand > img {
   height: $nav-height;
+}
+
+.cart-details {
+  width: 400px;
+  min-height: 100px;
+  top: 80%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 25px 50px -12px rgba($color: #000000, $alpha: 0.25);
+
+  .cart-image {
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+  }
+
+  .cart-item:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+// Transition
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
