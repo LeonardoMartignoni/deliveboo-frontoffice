@@ -5,12 +5,23 @@ export default {
   data() {
     return {
       store,
+
+      dishCounter: 1,
     };
   },
 
   methods: {
     closeDishLayover() {
       this.store.isDishLayoverOn = false;
+    },
+
+    increaseDishCounter() {
+      this.dishCounter += 1;
+    },
+
+    decreaseDishCounter() {
+      this.dishCounter -= 1;
+      if (this.dishCounter <= 1) this.dishCounter = 1;
     },
   },
 };
@@ -25,10 +36,33 @@ export default {
             <div class="col-5 offset-3 align-items-center">
               <div class="dish-layover-content position-relative h-100">
                 <!-- Close button -->
-                <button class="btn border-0 ps-0" @click="closeDishLayover()">
-                  <i class="bi bi-x-lg fs-1 text-primary"></i>
-                </button>
-                <img :src="store.currentDish.photo" />
+                <div class="position-absolute w-100 d-flex" @click="closeDishLayover()">
+                  <button class="btn border-0 ms-auto close-button rounded-circle m-2">
+                    <i class="bi bi-x-lg fs-3 text-primary"></i>
+                  </button>
+                </div>
+                <img class="dish-photo w-100" :src="store.currentDish.photo" />
+
+                <!-- Dish details -->
+                <div class="dish-details p-3">
+                  <!-- Description -->
+                  <h3>Descrizione</h3>
+                  <p>{{ store.currentDish.description }}</p>
+
+                  <!-- Quantity and cart -->
+                  <div class="buttons-cart d-flex flex-column flex-lg-row gap-3">
+                    <div class="d-flex justify-content-between align-items-center flex-grow-1 w-md-100 rounded-pill quantity-button">
+                      <button id="quantity-decrease" class="btn p-0 py-1 py-lg-0 border-0" @click="decreaseDishCounter()">
+                        <i class="bi bi-dash-lg text-primary px-3"></i>
+                      </button>
+                      <span>{{ dishCounter }}</span>
+                      <button id="quantity-increase" class="btn p-0 py-1 py-lg-0 border-0" @click="increaseDishCounter()">
+                        <i class="bi bi-plus-lg text-primary px-3"></i>
+                      </button>
+                    </div>
+                    <button class="btn btn-primary rounded-pill text-white flex-grow-1 w-md-100">Aggiungi per {{ store.currentDish.price }}</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -39,6 +73,8 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@import "../../styles/partials/variables";
+
 .dish-layover-row {
   background-color: rgba($color: #000000, $alpha: 0.5);
   width: 100vw;
@@ -46,10 +82,25 @@ export default {
   z-index: 100;
 
   .dish-layover-content {
-    min-height: 30vh;
     max-height: 70vh;
     background-color: white;
+    box-shadow: 0px 0px 35px 5px rgba($color: #000000, $alpha: 0.3);
     z-index: 150;
+
+    .close-button {
+      background-color: white;
+      box-shadow: 0px 0px 8px 3px rgba($color: #000000, $alpha: 0.3);
+    }
+
+    .dish-photo {
+      height: 230px;
+      object-fit: cover;
+    }
+
+    .quantity-button {
+      border: 1px solid $primary;
+      color: $primary;
+    }
   }
 }
 </style>
