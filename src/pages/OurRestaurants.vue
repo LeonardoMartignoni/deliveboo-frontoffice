@@ -5,7 +5,7 @@ import MenuDetail from "./MenuDetail.vue";
 export default {
   data() {
     return {
-      restaurantTypes: ["Italiano", "Americano", "Cinese", "Giapponese", "Messicano", "Indiano", "Pesce", "Carne", "Pizza", "Sushi", "Vegana"],
+      types: [],
       restaurants: [],
     };
   },
@@ -15,15 +15,23 @@ export default {
       if (!endpoint) endpoint = "http://127.0.0.1:8000/api/restaurants";
 
       axios.get(endpoint).then((response) => {
-        this.restaurants.data = response.data.results.data;
+        this.restaurants = response.data.results.data;
         this.restaurants.pages = response.data.results.links;
-        // console.log(response);
       });
     },
+
+    fetchTypes() {
+
+    }
   },
 
   created() {
     this.fetchRestaurants();
+    axios.get('http://127.0.0.1:8000/api/types').then((response) => {
+
+      // console.log(response)
+      this.types = response.data.results;
+    });
   },
 };
 </script>
@@ -53,10 +61,10 @@ export default {
 
             <div class="restaurant-type-filter d-flex flex-column gap-1">
               <div class="row">
-                <div class="col-6 col-sm-3 col-lg-12" v-for="typology in restaurantTypes">
+                <div class="col-6 col-sm-3 col-lg-12" v-for="typology in types">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" :id="typology.toLowerCase()" />
-                    <label class="form-check-label" :for="typology.toLowerCase()"> {{ typology }} </label>
+                    <input class="form-check-input" type="checkbox" :value="typology.id" :id="typology.id" />
+                    <label class="form-check-label" :for="typology.id"> {{ typology.name }} </label>
                   </div>
                 </div>
               </div>
@@ -67,7 +75,7 @@ export default {
         <!-- Restaurants List -->
         <div class="col-12 col-lg-9">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gy-4">
-            <div v-for="restaurant in restaurants.data" class="col">
+            <div v-for="restaurant in restaurants" class="col">
               <div class="border border-1 custom-border h-100 d-flex flex-column">
                 <img class="restaurant-thumbnail img-fluid" :src="restaurant.photo" />
 
@@ -79,7 +87,8 @@ export default {
                       {{ typology.name }}
                     </span>
                   </div>
-                  <router-link :to="{ name: 'menu-detail', params: { id: restaurant.id } }" class="btn btn-primary rounded-pill text-white w-100 mt-auto mb-0">Menù</router-link>
+                  <router-link :to="{ name: 'menu-detail', params: { id: restaurant.id } }"
+                    class="btn btn-primary rounded-pill text-white w-100 mt-auto mb-0">Menù</router-link>
                 </div>
               </div>
             </div>
@@ -90,16 +99,10 @@ export default {
       <nav class="d-flex" aria-label="restaurants pagination">
         <ul class="pagination ms-auto my-3">
           <li v-for="page in restaurants.pages" class="page-item">
-            <button
-              type="button"
-              class="page-link"
-              @click="fetchRestaurants(page.url)"
-              :class="{
-                disabled: !page.url,
-                active: page.active,
-              }"
-              v-html="page.label"
-            ></button>
+            <button type="button" class="page-link" @click="fetchRestaurants(page.url)" :class="{
+              disabled: !page.url,
+              active: page.active,
+            }" v-html="page.label"></button>
           </li>
         </ul>
       </nav>
