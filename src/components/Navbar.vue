@@ -29,10 +29,10 @@ export default {
         <div class="collapse navbar-collapse flex-grow-0">
           <ul class="list-group d-flex flex-row gap-3">
             <li>
-              <a href="#" class="btn btn-light rounded-pill px-4">Accedi</a>
+              <a href="http://127.0.0.1:8000/login" class="btn btn-light rounded-pill px-4">Accedi</a>
             </li>
             <li>
-              <a href="#" class="btn btn-light rounded-pill px-4">Registrati</a>
+              <a href="http://127.0.0.1:8000/register" class="btn btn-light rounded-pill px-4">Registrati</a>
             </li>
             <li>
               <button class="btn btn-light rounded-pill px-4" @click="store.isCartOpen = !store.isCartOpen">
@@ -58,7 +58,8 @@ export default {
                           <!-- Item prices -->
                           <div class="cart-product-prices d-flex">
                             <span>€{{ item.itemPrice.toFixed(2).replace(".", ",") }} x {{ item.itemQuantity }}</span>
-                            <span class="ms-2 text-primary fw-bold"> €{{ item.itemTotalPrice.toFixed(2).replace(".", ",") }}</span>
+                            <span class="ms-2 text-primary fw-bold"> €{{ item.itemTotalPrice.toFixed(2).replace(".", ",")
+                            }}</span>
                           </div>
                         </div>
 
@@ -89,7 +90,7 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/partials/variables";
 
-.navbar-brand > img {
+.navbar-brand>img {
   height: $nav-height;
 }
 
