@@ -6,6 +6,7 @@ import Jumbotron from "./components/Jumbotron.vue";
 import OurRestaurants from "./pages/OurRestaurants.vue";
 import FooterDetails from "./components/FooterDetails.vue";
 import MenuLayover from "./components/partials/_MenuLayover.vue";
+import DishLayover from "./components/partials/_DishLayover.vue";
 
 export default {
   data() {
@@ -22,6 +23,7 @@ export default {
     OurRestaurants,
     FooterDetails,
     MenuLayover,
+    DishLayover,
   },
 
   methods: {
@@ -31,6 +33,11 @@ export default {
 
     changeJumbotronPic(data) {
       this.jumbotronPicPath = data;
+    },
+
+    selectDish(dish) {
+      this.store.currentDish = dish;
+      this.store.isDishLayoverOn = true;
     },
   },
 
@@ -44,14 +51,13 @@ export default {
 </script>
 
 <template>
-  <div v-if="isMenuOn">
-    <MenuLayover @toggle-menu="toggleMenu()" />
-  </div>
+  <MenuLayover v-if="isMenuOn" @toggle-menu="toggleMenu()" />
+  <DishLayover v-if="store.isDishLayoverOn" />
 
   <Navbar class="navbar-component" @toggle-menu="toggleMenu()" />
   <Jumbotron :jumbotronPicPath="jumbotronPicPath" :title="store.jumbotronTitle" />
   <main>
-    <router-view @change-jumbotron-pic="changeJumbotronPic"> </router-view>
+    <router-view @change-jumbotron-pic="changeJumbotronPic" @select-dish="selectDish"> </router-view>
   </main>
   <footer>
     <FooterDetails />

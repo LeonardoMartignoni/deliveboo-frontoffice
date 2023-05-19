@@ -15,6 +15,10 @@ export default {
     changeJumbotron() {
       this.$emit("change-jumbotron-pic", this.restaurantPic);
     },
+
+    emitDish(dish) {
+      this.$emit("select-dish", dish);
+    },
   },
 
   created() {
@@ -35,7 +39,7 @@ export default {
       <div class="col-12">
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 gy-4">
           <div v-for="dish in restaurant.dishes" class="col">
-            <div class="border border-1 custom-border h-100 d-flex flex-column">
+            <button @click="emitDish(dish)" class="btn text-start p-0 border border-1 custom-border h-100 d-flex flex-column w-100">
               <img class="restaurant-thumbnail img-fluid" :src="dish.photo" />
 
               <!-- Restaurant details -->
@@ -48,7 +52,7 @@ export default {
                 </div>
                 <h6 class="dish-price mt-auto mb-0">€{{ dish.price.toFixed(2).replace(".", ",") }}</h6>
               </div>
-            </div>
+            </button>
           </div>
         </div>
       </div>
