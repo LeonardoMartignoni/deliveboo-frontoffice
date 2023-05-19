@@ -20,9 +20,9 @@ export default {
   <div class="container position-relative">
     <nav class="navbar navbar-expand-lg bg-body-tertiary position-absolute w-100 start-0">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <router-link class="navbar-brand" :to="{ name: 'home' }">
           <img src="/images/logo-white.svg" alt="Bootstrap" class="img-fluid" />
-        </a>
+        </router-link>
         <button class="btn border-0 d-block d-lg-none" @click="$emit('toggle-menu')">
           <i class="bi bi-list fs-1 text-white"></i>
         </button>
@@ -58,8 +58,7 @@ export default {
                           <!-- Item prices -->
                           <div class="cart-product-prices d-flex">
                             <span>€{{ item.itemPrice.toFixed(2).replace(".", ",") }} x {{ item.itemQuantity }}</span>
-                            <span class="ms-2 text-primary fw-bold"> €{{ item.itemTotalPrice.toFixed(2).replace(".", ",")
-                            }}</span>
+                            <span class="ms-2 text-primary fw-bold"> €{{ item.itemTotalPrice.toFixed(2).replace(".", ",") }}</span>
                           </div>
                         </div>
 
@@ -90,7 +89,7 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/partials/variables";
 
-.navbar-brand>img {
+.navbar-brand > img {
   height: $nav-height;
 }
 
