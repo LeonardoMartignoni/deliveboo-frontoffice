@@ -27,11 +27,12 @@ export default {
     addItemToCart() {
       // Add item to cart
       this.store.cartItems.push({
+        itemID: this.store.currentDish.id,
         itemImage: this.store.currentDish.photo,
         itemName: this.store.currentDish.name,
         itemPrice: this.store.currentDish.price,
         itemQuantity: this.dishCounter,
-        itemTotalPrice: (this.store.currentDish.price * this.dishCounter).toFixed(2),
+        itemTotalPrice: parseFloat((this.store.currentDish.price * this.dishCounter).toFixed(2)),
       });
       // Then open cart
       this.store.isCartOpen = true;
@@ -74,7 +75,7 @@ export default {
                         <i class="bi bi-plus-lg text-primary px-3"></i>
                       </button>
                     </div>
-                    <button class="btn btn-primary rounded-pill text-white flex-grow-1 w-md-100" @click="addItemToCart()">Aggiungi per {{ store.currentDish.price }}</button>
+                    <button class="btn btn-primary rounded-pill text-white flex-grow-1 w-md-100" @click="addItemToCart()">Aggiungi per {{ (store.currentDish.price * dishCounter).toFixed(2).replace(".", ",") }}</button>
                   </div>
                 </div>
               </div>

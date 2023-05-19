@@ -7,6 +7,12 @@ export default {
       store,
     };
   },
+
+  methods: {
+    removeItemFromCart(index) {
+      this.store.cartItems.splice(index, 1);
+    },
+  },
 };
 </script>
 
@@ -39,27 +45,33 @@ export default {
                   <h6 class="fw-bold p-3 m-0">Carrello</h6>
                   <hr class="m-0" />
 
-                  <div v-for="item in store.cartItems" class="cart-items-list p-3">
-                    <div class="cart-item d-flex">
-                      <!-- Item image -->
-                      <img :src="item.itemImage" class="cart-image img-fluid" />
+                  <div v-if="store.cartItems.length > 0" class="p-3">
+                    <div class="cart-items-list">
+                      <div v-for="(item, index) in store.cartItems" class="cart-item d-flex">
+                        <!-- Item image -->
+                        <img :src="item.itemImage" class="cart-image img-fluid" />
 
-                      <!-- Item details -->
-                      <div class="cart-product-details d-flex flex-column ms-2">
-                        <span class="d-block">{{ item.itemName }}</span>
+                        <!-- Item details -->
+                        <div class="cart-product-details d-flex flex-column ms-2">
+                          <span class="d-block fw-bold">{{ item.itemName }}</span>
 
-                        <!-- Item prices -->
-                        <div class="cart-product-prices d-flex">
-                          <span>€{{ item.itemPrice }} x {{ item.itemQuantity }}</span>
-                          <span class="ms-2 text-primary fw-bold"> €{{ item.itemTotalPrice }}</span>
+                          <!-- Item prices -->
+                          <div class="cart-product-prices d-flex">
+                            <span>€{{ item.itemPrice.toFixed(2).replace(".", ",") }} x {{ item.itemQuantity }}</span>
+                            <span class="ms-2 text-primary fw-bold"> €{{ item.itemTotalPrice.toFixed(2).replace(".", ",") }}</span>
+                          </div>
                         </div>
-                      </div>
 
-                      <!-- Item remove from cart -->
-                      <button class="btn border-0 ms-auto">
-                        <i class="bi bi-trash3"></i>
-                      </button>
+                        <!-- Item remove from cart -->
+                        <button class="btn border-0 ms-auto" @click="removeItemFromCart(index)">
+                          <i class="bi bi-trash3"></i>
+                        </button>
+                      </div>
                     </div>
+                  </div>
+
+                  <div v-else class="cart-empty text-center p-3">
+                    <span>Carrello vuoto</span>
                   </div>
                 </div>
               </Transition>
