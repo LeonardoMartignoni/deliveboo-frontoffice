@@ -13,10 +13,8 @@ export default {
   },
 
   methods: {
-    fetchRestaurants() {
-      const endpoint = "http://127.0.0.1:8000/api/restaurants";
-      const typeParams = this.selectedTypes.join(",");
-
+    fetchRestaurants(endpoint = null) {
+      if (!endpoint) endpoint = "http://127.0.0.1:8000/api/restaurants";
       let params = {};
 
       if (this.selectedTypes.length > 0) {
