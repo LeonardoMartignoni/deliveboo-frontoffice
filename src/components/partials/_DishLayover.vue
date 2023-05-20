@@ -53,7 +53,7 @@ export default {
                 <!-- Close button -->
                 <div class="position-absolute w-100 d-flex" @click="closeDishLayover()">
                   <button class="btn border-0 ms-auto close-button rounded-circle m-2">
-                    <i class="bi bi-x-lg fs-3 text-primary"></i>
+                    <i class="bi bi-x-lg fs-4 text-primary"></i>
                   </button>
                 </div>
                 <img class="dish-photo w-100" :src="store.currentDish.photo" />
