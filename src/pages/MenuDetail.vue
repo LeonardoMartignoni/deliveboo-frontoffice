@@ -46,7 +46,7 @@ export default {
               <div class="restaurant-details p-3 d-flex flex-column flex-grow-1">
                 <h5 class="m-0">{{ dish.name }}</h5>
                 <div class="mb-2 mt-1">
-                  <span class="restaurant-type">
+                  <span class="restaurant-description">
                     {{ dish.description }}
                   </span>
                 </div>
@@ -73,8 +73,16 @@ export default {
   object-fit: cover;
 }
 
-.restaurant-type {
+.restaurant-description {
   font-size: 0.9rem;
+
+  // Regole per mantenere tutta la descrizione massimo a 2 linee
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  max-height: 3.6em;
 }
 
 .restaurant-details {
