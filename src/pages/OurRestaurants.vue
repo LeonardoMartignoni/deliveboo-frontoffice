@@ -7,31 +7,39 @@ export default {
     return {
       types: [],
       restaurants: [],
+
+      selectedTypes: [],
     };
   },
 
   methods: {
-    fetchRestaurants(endpoint = null) {
-      if (!endpoint) endpoint = "http://127.0.0.1:8000/api/restaurants";
+    fetchRestaurants() {
+      const endpoint = "http://127.0.0.1:8000/api/restaurants";
+      const typeParams = this.selectedTypes.join(",");
 
-      axios.get(endpoint).then((response) => {
+      let params = {};
+
+      if (this.selectedTypes.length > 0) {
+        params = { types: this.selectedTypes.join(",") };
+      }
+
+      axios.get(endpoint, { params }).then((response) => {
         this.restaurants = response.data.results.data;
         this.restaurants.pages = response.data.results.links;
       });
     },
 
     fetchTypes() {
-
-    }
+      axios.get("http://127.0.0.1:8000/api/types").then((response) => {
+        // console.log(response)
+        this.types = response.data.results;
+      });
+    },
   },
 
   created() {
     this.fetchRestaurants();
-    axios.get('http://127.0.0.1:8000/api/types').then((response) => {
-
-      // console.log(response)
-      this.types = response.data.results;
-    });
+    this.fetchTypes();
   },
 };
 </script>
@@ -63,7 +71,7 @@ export default {
               <div class="row">
                 <div class="col-6 col-sm-3 col-lg-12" v-for="typology in types">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" :value="typology.id" :id="typology.id" />
+                    <input class="form-check-input" type="checkbox" :value="typology.id" :id="typology.id" v-model="selectedTypes" @change="fetchRestaurants()" />
                     <label class="form-check-label" :for="typology.id"> {{ typology.name }} </label>
                   </div>
                 </div>
@@ -87,8 +95,7 @@ export default {
                       {{ typology.name }}
                     </span>
                   </div>
-                  <router-link :to="{ name: 'menu-detail', params: { id: restaurant.id } }"
-                    class="btn btn-primary rounded-pill text-white w-100 mt-auto mb-0">Menù</router-link>
+                  <router-link :to="{ name: 'menu-detail', params: { id: restaurant.id } }" class="btn btn-primary rounded-pill text-white w-100 mt-auto mb-0">Menù</router-link>
                 </div>
               </div>
             </div>
@@ -99,10 +106,16 @@ export default {
       <nav class="d-flex" aria-label="restaurants pagination">
         <ul class="pagination ms-auto my-3">
           <li v-for="page in restaurants.pages" class="page-item">
-            <button type="button" class="page-link" @click="fetchRestaurants(page.url)" :class="{
-              disabled: !page.url,
-              active: page.active,
-            }" v-html="page.label"></button>
+            <button
+              type="button"
+              class="page-link"
+              @click="fetchRestaurants(page.url)"
+              :class="{
+                disabled: !page.url,
+                active: page.active,
+              }"
+              v-html="page.label"
+            ></button>
           </li>
         </ul>
       </nav>
