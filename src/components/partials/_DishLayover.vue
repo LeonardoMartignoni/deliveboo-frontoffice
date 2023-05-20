@@ -75,7 +75,7 @@ export default {
                         <i class="bi bi-plus-lg text-primary px-3"></i>
                       </button>
                     </div>
-                    <button class="btn btn-primary rounded-pill text-white w-100" @click="addItemToCart()">Aggiungi per {{ (store.currentDish.price * dishCounter).toFixed(2).replace(".", ",") }}</button>
+                    <button class="btn btn-primary rounded-pill text-white w-100" @click="addItemToCart()">Aggiungi per €{{ (store.currentDish.price * dishCounter).toFixed(2).replace(".", ",") }}</button>
                   </div>
                 </div>
               </div>
