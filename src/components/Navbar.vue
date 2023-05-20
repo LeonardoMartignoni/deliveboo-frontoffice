@@ -99,7 +99,7 @@ export default {
   top: 80%;
   right: 0;
   background-color: white;
-  box-shadow: 0 25px 50px -12px rgba($color: #000000, $alpha: 0.25);
+  box-shadow: 0 0px 50px -12px rgba($color: #000000, $alpha: 0.25);
 
   .cart-image {
     width: 3rem;

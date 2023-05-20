@@ -99,12 +99,12 @@ export default {
   .dish-layover-content {
     max-height: 70vh;
     background-color: white;
-    box-shadow: 0px 0px 35px 5px rgba($color: #000000, $alpha: 0.3);
+    box-shadow: 0 0px 50px -10px rgba($color: #000000, $alpha: 0.25);
     z-index: 150;
 
     .close-button {
       background-color: white;
-      box-shadow: 0px 0px 8px 3px rgba($color: #000000, $alpha: 0.3);
+      box-shadow: 0 0px 50px -10px rgba($color: #000000, $alpha: 0.5);
     }
 
     .dish-photo {
