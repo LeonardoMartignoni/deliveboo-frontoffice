@@ -46,6 +46,7 @@ export default {
     $route(to, from) {
       this.jumbotronPicPath = "/images/jumbotron-overlay.png";
       this.store.jumbotronTitle = this.store.jumbotronDefaultTitle;
+      this.store.isDishLayoverOn = false;
     },
   },
 };
