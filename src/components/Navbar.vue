@@ -38,6 +38,7 @@ export default {
               <button class="btn btn-light rounded-pill px-4" @click="store.isCartOpen = !store.isCartOpen">
                 <i class="bi bi-cart2"></i>
               </button>
+              <div class="badge" style="background-color: darkorchid; color: white; text-align: center; border-radius: 5px; position: relative; top: -15px; right: 20px; width: 1.5rem; padding: 2px;">0</div>
 
               <!-- Cart details -->
               <Transition>
