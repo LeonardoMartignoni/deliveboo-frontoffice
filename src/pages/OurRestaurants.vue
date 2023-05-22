@@ -1,10 +1,12 @@
 <script>
 import axios from "axios";
+import { store } from "../store/store";
 import MenuDetail from "./MenuDetail.vue";
 
 export default {
   data() {
     return {
+      store,
       types: [],
       restaurants: [],
 
@@ -38,6 +40,9 @@ export default {
   created() {
     this.fetchRestaurants();
     this.fetchTypes();
+
+    this.store.currentRestaurantId = "";
+    this.store.cartItems = [];
   },
 };
 </script>
