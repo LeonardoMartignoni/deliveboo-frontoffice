@@ -12,7 +12,7 @@ export const store = reactive({
   currentDish: {},
 
   // Cart
+  currentRestaurantId: "",
   cartItems: [],
-
   isCartOpen: false,
 });
