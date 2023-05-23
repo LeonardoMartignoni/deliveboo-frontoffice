@@ -39,9 +39,7 @@ export default {
       this.store.dishesQuantity.push(this.dishCounter);
       localStorage.setItem("dishes_id", JSON.stringify(this.store.dishesId));
       localStorage.setItem("quantity", JSON.stringify(this.store.dishesQuantity));
-
-      // Badge quantity
-      store.quantityBadge += this.dishCounter;
+      localStorage.setItem("cartItems", JSON.stringify(this.store.cartItems));
 
       // Then open cart
       this.store.isCartOpen = true;

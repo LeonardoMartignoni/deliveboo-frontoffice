@@ -16,5 +16,4 @@ export const store = reactive({
   dishesId: [],
   dishesQuantity: [],
   isCartOpen: false,
-  quantityBadge: 0,
 });

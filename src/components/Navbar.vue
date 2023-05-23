@@ -10,12 +10,24 @@ export default {
 
   methods: {
     removeItemFromCart(index) {
-      store.quantityBadge -= this.store.cartItems[index].itemQuantity;
-      this.store.cartItems.splice(index, 1);
       this.store.dishesId.splice(index, 1);
       this.store.dishesQuantity.splice(index, 1);
+      this.store.cartItems.splice(index, 1);
       localStorage.setItem("dishes_id", JSON.stringify(this.store.dishesId));
       localStorage.setItem("quantity", JSON.stringify(this.store.dishesQuantity));
+      localStorage.setItem("cartItems", JSON.stringify(this.store.cartItems));
+    },
+  },
+
+  computed: {
+    totalItemAmount() {
+      let totalItems = 0;
+
+      this.store.cartItems.forEach((item) => {
+        totalItems += item.itemQuantity;
+      });
+
+      return totalItems;
     },
   },
 };
@@ -44,8 +56,8 @@ export default {
                 <i class="bi bi-cart2"></i>
               </button>
               <!--  -->
-              <div v-if="store.quantityBadge > 0" class="quantity-badge badge rounded-pill">
-                {{ store.quantityBadge }}
+              <div v-if="totalItemAmount > 0" class="quantity-badge badge rounded-pill">
+                {{ totalItemAmount }}
               </div>
 
               <!-- Cart details -->

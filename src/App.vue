@@ -49,6 +49,21 @@ export default {
       this.store.isDishLayoverOn = false;
     },
   },
+
+  created() {
+    if (localStorage.getItem("cartItems") != null) {
+      const storageCartitems = localStorage.getItem("cartItems");
+      this.store.cartItems = JSON.parse(storageCartitems);
+    }
+    if (localStorage.getItem("dishes_id") != null) {
+      const storageDishesId = localStorage.getItem("dishes_id");
+      this.store.dishesId = JSON.parse(storageDishesId);
+    }
+    if (localStorage.getItem("quantity") != null) {
+      const storageDishesQuantity = localStorage.getItem("quantity");
+      this.store.dishesQuantity = JSON.parse(storageDishesQuantity);
+    }
+  },
 };
 </script>
 
