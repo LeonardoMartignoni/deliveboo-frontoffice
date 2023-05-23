@@ -8,13 +8,15 @@ export default {
       store,
 
       formData: {
-        restaurant_id: store.currentRestaurantId,
+        restaurant_id: localStorage.getItem("restaurant_id"),
         customer_name: "",
         customer_surname: "",
         customer_address: "",
         customer_mail: "",
         customer_phone_number: "",
         note: "",
+        dishes_id: localStorage.getItem("dishes_id"),
+        quantity: localStorage.getItem("quantity"),
       },
     };
   },
@@ -99,7 +101,7 @@ export default {
               <textarea type="text" class="form-control" id="note" rows="3" v-model="formData.note"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary w-100 rounded-pill text-white">Invia l'ordine</button>
           </form>
         </div>
 
