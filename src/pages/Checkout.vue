@@ -6,31 +6,22 @@ export default {
   data() {
     return {
       store,
+
+      formData: {
+        restaurant_id: store.currentRestaurantId,
+        customer_name: "",
+        customer_surname: "",
+        customer_address: "",
+        customer_mail: "",
+        customer_phone_number: "",
+        note: "",
+      },
     };
   },
 
   methods: {
     submitForm() {
-      let params = {
-        restaurant_id: this.store.currentRestaurantId,
-        customer_name: this.customer_name,
-        customer_surname: this.customer_surname,
-        customer_address: this.customer_address,
-        customer_mail: this.customer_mail,
-        customer_phone_number: this.customer_phone_number,
-        // dishes_id: this.store.dishes_id,
-      };
-
-      axios
-        .post("/api/orders", { params })
-        .then((response) => {
-          // Gestisci la risposta del server se necessario
-          console.log(response.data);
-        })
-        .catch((error) => {
-          // Gestisci l'errore se la richiesta non ha avuto successo
-          console.error(error);
-        });
+      axios.post("http://127.0.0.1:8000/api/order", this.formData);
     },
   },
 
@@ -85,27 +76,27 @@ export default {
           <form method="POST" @submit.prevent="submitForm">
             <div class="mb-3">
               <label for="customer_name" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="customer_name" v-model="customer_name" />
+              <input type="text" class="form-control" id="customer_name" v-model="formData.customer_name" />
             </div>
             <div class="mb-3">
               <label for="customer_surname" class="form-label">Cognome</label>
-              <input type="text" class="form-control" id="customer_surname" v-model="customer_surname" />
+              <input type="text" class="form-control" id="customer_surname" v-model="formData.customer_surname" />
             </div>
             <div class="mb-3">
               <label for="customer_address" class="form-label">Indirizzo</label>
-              <input type="text" class="form-control" id="customer_address" v-model="customer_address" />
+              <input type="text" class="form-control" id="customer_address" v-model="formData.customer_address" />
             </div>
             <div class="mb-3">
               <label for="customer_mail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="customer_mail" v-model="customer_mail" />
+              <input type="email" class="form-control" id="customer_mail" v-model="formData.customer_mail" />
             </div>
             <div class="mb-3">
               <label for="customer_phone_number" class="form-label">Telefono</label>
-              <input type="text" class="form-control" id="customer_phone_number" v-model="customer_phone_number" maxlength="11" />
+              <input type="text" class="form-control" id="customer_phone_number" v-model="formData.customer_phone_number" maxlength="11" />
             </div>
             <div class="mb-3">
               <label for="note" class="form-label">Note</label>
-              <textarea type="text" class="form-control" id="note" rows="3" v-model="note"></textarea>
+              <textarea type="text" class="form-control" id="note" rows="3" v-model="formData.note"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
