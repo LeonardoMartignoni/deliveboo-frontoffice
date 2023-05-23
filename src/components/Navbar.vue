@@ -65,7 +65,7 @@ export default {
                           <div class="cart-product-prices d-flex">
                             <span>€{{ item.itemPrice.toFixed(2).replace(".", ",") }} x {{ item.itemQuantity }}</span>
                             <span class="ms-2 text-primary fw-bold"> €{{ item.itemTotalPrice.toFixed(2).replace(".", ",")
-                                                          }}</span>
+                            }}</span>
                           </div>
                         </div>
 
@@ -77,7 +77,9 @@ export default {
                     </div>
 
                     <!-- Checkout button -->
-                    <button class="btn btn-primary text-white w-100 rounded-pill">Vai al pagamento</button>
+                    <router-link :to="{ name: 'checkout' }" class="btn btn-primary text-white w-100 rounded-pill">Vai al
+                      pagamento</router-link>
+                    <!-- <button class="btn btn-primary text-white w-100 rounded-pill">Vai al pagamento</button> -->
                   </div>
 
                   <div v-else class="cart-empty text-center p-3">
