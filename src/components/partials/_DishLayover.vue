@@ -25,7 +25,6 @@ export default {
     },
 
     addItemToCart() {
-
       this.store.cartItems.push({
         itemID: this.store.currentDish.id,
         itemImage: this.store.currentDish.photo,
@@ -34,7 +33,13 @@ export default {
         itemQuantity: this.dishCounter,
         itemTotalPrice: parseFloat((this.store.currentDish.price * this.dishCounter).toFixed(2)),
       });
-      
+
+      // LocalStorage
+      this.store.dishesId.push(this.store.currentDish.id);
+      this.store.dishesQuantity.push(this.dishCounter);
+      localStorage.setItem("dishes_id", JSON.stringify(this.store.dishesId));
+      localStorage.setItem("quantity", JSON.stringify(this.store.dishesQuantity));
+
       // Badge quantity
       store.quantityBadge += this.dishCounter;
 
@@ -79,8 +84,7 @@ export default {
                         <i class="bi bi-plus-lg text-primary px-3"></i>
                       </button>
                     </div>
-                    <button class="btn btn-primary rounded-pill text-white w-100" @click="addItemToCart()">Aggiungi per
-                      €{{ (store.currentDish.price * dishCounter).toFixed(2).replace(".", ",") }}</button>
+                    <button class="btn btn-primary rounded-pill text-white w-100" @click="addItemToCart()">Aggiungi per €{{ (store.currentDish.price * dishCounter).toFixed(2).replace(".", ",") }}</button>
                   </div>
                 </div>
               </div>

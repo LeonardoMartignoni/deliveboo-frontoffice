@@ -12,6 +12,10 @@ export default {
     removeItemFromCart(index) {
       store.quantityBadge -= this.store.cartItems[index].itemQuantity;
       this.store.cartItems.splice(index, 1);
+      this.store.dishesId.splice(index, 1);
+      this.store.dishesQuantity.splice(index, 1);
+      localStorage.setItem("dishes_id", JSON.stringify(this.store.dishesId));
+      localStorage.setItem("quantity", JSON.stringify(this.store.dishesQuantity));
     },
   },
 };
@@ -63,8 +67,7 @@ export default {
                           <!-- Item prices -->
                           <div class="cart-product-prices d-flex">
                             <span>€{{ item.itemPrice.toFixed(2).replace(".", ",") }} x {{ item.itemQuantity }}</span>
-                            <span class="ms-2 text-primary fw-bold"> €{{ item.itemTotalPrice.toFixed(2).replace(".", ",")
-                            }}</span>
+                            <span class="ms-2 text-primary fw-bold"> €{{ item.itemTotalPrice.toFixed(2).replace(".", ",") }}</span>
                           </div>
                         </div>
 
@@ -76,8 +79,7 @@ export default {
                     </div>
 
                     <!-- Checkout button -->
-                    <router-link :to="{ name: 'checkout' }" class="btn btn-primary text-white w-100 rounded-pill">Vai al
-                      pagamento</router-link>
+                    <router-link :to="{ name: 'checkout' }" class="btn btn-primary text-white w-100 rounded-pill">Vai al pagamento</router-link>
                     <!-- <button class="btn btn-primary text-white w-100 rounded-pill">Vai al pagamento</button> -->
                   </div>
 
@@ -97,7 +99,7 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/partials/variables";
 
-.navbar-brand>img {
+.navbar-brand > img {
   height: $nav-height;
 }
 

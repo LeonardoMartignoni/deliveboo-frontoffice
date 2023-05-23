@@ -24,11 +24,12 @@ export default {
   created() {
     axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
       this.restaurant = response.data.results;
-      this.store.currentRestaurantId = this.restaurant.id;
       this.restaurantPic = this.restaurant.photo;
       this.store.jumbotronTitle = this.restaurant.name;
       this.store.jumbotronRestaurantDescription = this.restaurant.description;
       this.changeJumbotron();
+
+      localStorage.setItem("restaurant_id", this.restaurant.id);
     });
   },
 };
