@@ -3,7 +3,8 @@ import { reactive } from "vue";
 export const store = reactive({
   // Jumbotron
   jumbotronPicPath: "/images/jumbotron-overlay.png",
-  jumbotronDefaultTitle: 'Piatti <span class="fw-bold text-decoration-underline">spaventosamente</span> buoni, <br class="d-block d-lg-none d-xxl-block" /> a domicilio.',
+  jumbotronDefaultTitle:
+    'Piatti <span class="fw-bold text-decoration-underline">spaventosamente</span> buoni, <br class="d-block d-lg-none d-xxl-block" /> a domicilio.',
   jumbotronTitle: "",
   jumbotronRestaurantDescription: "",
 
@@ -15,4 +16,5 @@ export const store = reactive({
   currentRestaurantId: "",
   cartItems: [],
   isCartOpen: false,
+  quantityBadge: 0,
 });

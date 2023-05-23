@@ -25,7 +25,7 @@ export default {
     },
 
     addItemToCart() {
-      // Add item to cart
+
       this.store.cartItems.push({
         itemID: this.store.currentDish.id,
         itemImage: this.store.currentDish.photo,
@@ -34,6 +34,10 @@ export default {
         itemQuantity: this.dishCounter,
         itemTotalPrice: parseFloat((this.store.currentDish.price * this.dishCounter).toFixed(2)),
       });
+      
+      // Badge quantity
+      store.quantityBadge += this.dishCounter;
+
       // Then open cart
       this.store.isCartOpen = true;
       this.store.isDishLayoverOn = false;
@@ -75,7 +79,8 @@ export default {
                         <i class="bi bi-plus-lg text-primary px-3"></i>
                       </button>
                     </div>
-                    <button class="btn btn-primary rounded-pill text-white w-100" @click="addItemToCart()">Aggiungi per €{{ (store.currentDish.price * dishCounter).toFixed(2).replace(".", ",") }}</button>
+                    <button class="btn btn-primary rounded-pill text-white w-100" @click="addItemToCart()">Aggiungi per
+                      €{{ (store.currentDish.price * dishCounter).toFixed(2).replace(".", ",") }}</button>
                   </div>
                 </div>
               </div>
