@@ -12,7 +12,6 @@ export default {
     removeItemFromCart(index) {
       store.quantityBadge -= this.store.cartItems[index].itemQuantity;
       this.store.cartItems.splice(index, 1);
-
     },
   },
 };
@@ -36,14 +35,14 @@ export default {
             <li>
               <a href="http://127.0.0.1:8000/register" class="btn btn-light rounded-pill px-4">Registrati</a>
             </li>
-            <li>
+            <li class="position-relative">
               <button class="btn btn-light rounded-pill px-4" @click="store.isCartOpen = !store.isCartOpen">
                 <i class="bi bi-cart2"></i>
               </button>
               <!--  -->
-              <div v-if="store.quantityBadge > 0" class="badge"
-                style="background-color: darkorchid; color: white; text-align: center; border-radius: 5px; position: relative; top: -15px; right: 20px; width: 1.5rem; padding: 2px;">
-                {{ store.quantityBadge }}</div>
+              <div v-if="store.quantityBadge > 0" class="quantity-badge badge rounded-pill">
+                {{ store.quantityBadge }}
+              </div>
 
               <!-- Cart details -->
               <Transition>
@@ -119,6 +118,18 @@ export default {
   .cart-item {
     margin-bottom: 1rem;
   }
+}
+
+.quantity-badge {
+  background-color: darkorchid;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 1.5rem;
+  padding: 2px;
 }
 
 // Transition
