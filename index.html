@@ -14,10 +14,25 @@
 
   <!-- Title -->
   <title>Deliveboo</title>
+  <script src="https://js.braintreegateway.com/web/dropin/1.37.0/js/dropin.min.js" defer></script>
 </head>
 
 <body>
   <div id="app"></div>
+
+  <!-- <script type="text/javascript">
+    // Step two: create a dropin instance using that container (or a string
+    //   that functions as a query selector such as `#dropin-container`)
+    braintree.dropin.create({
+      container: document.getElementById('dropin-container'),
+      authorization: sandbox_pg55c8z5_bbhn9fzx5pnfp46z,
+      container: '#dropin-container'
+    }, (error, dropinInstance) => {
+      // Use `dropinInstance` here
+      // Methods documented at https://braintree.github.io/braintree-web-drop-in/docs/current/Dropin.html
+    });
+  </script> -->
+
   <script type="module" src="/src/main.js"></script>
 </body>
 
