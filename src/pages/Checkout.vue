@@ -61,29 +61,32 @@ export default {
 <template>
   <div id="checkout" class="my-5">
     <div class="container">
-      <h2 class="fs-1">Checkout</h2>
-
-      <div class="row mt-5 gx-4">
+      <div class="row mt-2 gx-4 gy-4 gy-lg-0">
         <!-- Box prodotti nel carrello -->
-        <div class="col-6">
-          <div class="form-content border p-4 h-100 rounded-3">
-            <h3>Il tuo ordine</h3>
+        <div class="col-12 col-lg-6">
+          <div class="form-content border h-100 rounded-3">
+            <div class="form-title p-3">
+              <h3 class="m-0">Il tuo ordine</h3>
+            </div>
 
-            <div class="order-items-content d-flex flex-column">
-              <div v-for="(item, index) in store.cartItems" class="card mb-3">
-                <div class="row">
-                  <div class="col-md-4">
+            <hr class="m-0" />
+
+            <div v-if="store.cartItems.length" class="order-items-content d-flex flex-column p-3 gap-3">
+              <div v-for="(item, index) in store.cartItems" class="card">
+                <div class="row card-row">
+                  <div class="col-4 h-100">
                     <img :src="item.itemImage" class="rounded-start" alt="image" />
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-8 h-100 ps-0">
                     <div class="card-body d-flex align-items-center h-100 ps-0">
                       <div class="card-details">
                         <h5 class="card-title m-0">{{ item.itemName }}</h5>
                         <p class="card-text m-0">Quantità: {{ item.itemQuantity }}</p>
+                        <span class="text-primary fw-bold me-2 d-block d-sm-none">€{{ item.itemTotalPrice.toFixed(2).replace(".", ",") }}</span>
                       </div>
 
                       <div class="item-price-delete d-flex align-items-center ms-auto">
-                        <span class="text-primary fw-bold me-2">€{{ item.itemTotalPrice.toFixed(2).replace(".", ",") }}</span>
+                        <span class="text-primary fw-bold me-2 d-none d-sm-block">€{{ item.itemTotalPrice.toFixed(2).replace(".", ",") }}</span>
 
                         <!-- Item remove from cart -->
                         <button class="btn border-0 ms-auto" @click="removeItemFromCart(index)">
@@ -95,14 +98,23 @@ export default {
                 </div>
               </div>
             </div>
+
+            <div v-else class="p-3">
+              <p class="m-0">Nessun prodotto nel carrello.</p>
+            </div>
           </div>
         </div>
 
         <!-- Box form dati utente -->
-        <div class="col-6">
-          <div class="form-content border p-4 rounded-3">
-            <h3>Inserisci i dati per la consegna</h3>
-            <form method="POST" @submit.prevent="submitForm">
+        <div class="col-12 col-lg-6">
+          <div class="form-content border rounded-3">
+            <div class="form-title p-3">
+              <h3 class="m-0">Inserisci i dati per la consegna</h3>
+            </div>
+
+            <hr class="m-0" />
+
+            <form class="p-3" method="POST" @submit.prevent="submitForm">
               <div class="mb-3">
                 <label for="customer_name" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="customer_name" v-model="formData.customer_name" />
@@ -148,13 +160,15 @@ export default {
 
 img {
   width: 100%;
-  height: 80px;
+  min-height: 80px;
+  height: 100%;
   object-fit: cover;
 }
 
 .order-items-content {
-  overflow-x: hidden;
-  max-height: 500px;
+  .card-row {
+    height: 80px;
+  }
 }
 
 .card-text {
