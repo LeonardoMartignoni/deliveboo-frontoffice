@@ -7,6 +7,7 @@ import OurRestaurants from "./pages/OurRestaurants.vue";
 import FooterDetails from "./components/FooterDetails.vue";
 import MenuLayover from "./components/partials/_MenuLayover.vue";
 import DishLayover from "./components/partials/_DishLayover.vue";
+import CartRemoveLayover from "./components/partials/_CartRemoveLayover.vue";
 
 export default {
   data() {
@@ -24,6 +25,7 @@ export default {
     FooterDetails,
     MenuLayover,
     DishLayover,
+    CartRemoveLayover,
   },
 
   methods: {
@@ -63,6 +65,10 @@ export default {
       const storageDishesQuantity = localStorage.getItem("quantity");
       this.store.dishesQuantity = JSON.parse(storageDishesQuantity);
     }
+    if (localStorage.getItem("restaurant_id") != null) {
+      const storageRestaurantId = localStorage.getItem("restaurant_id");
+      this.store.currentRestaurantId = storageRestaurantId;
+    }
   },
 };
 </script>
@@ -70,6 +76,7 @@ export default {
 <template>
   <MenuLayover v-if="isMenuOn" @toggle-menu="toggleMenu()" />
   <DishLayover v-if="store.isDishLayoverOn" />
+  <CartRemoveLayover v-if="store.isCartRemoveLayoverOn" />
 
   <Navbar class="navbar-component" @toggle-menu="toggleMenu()" />
   <Jumbotron :jumbotronPicPath="jumbotronPicPath" :title="store.jumbotronTitle" />

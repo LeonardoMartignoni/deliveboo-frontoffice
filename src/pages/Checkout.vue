@@ -28,6 +28,8 @@ export default {
   },
 
   mounted() {
+    this.store.isCartOpen = false;
+
     var button = document.querySelector("#submit-button");
 
     braintree.dropin.create(

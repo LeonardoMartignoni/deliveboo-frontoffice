@@ -24,12 +24,20 @@ export default {
   created() {
     axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
       this.restaurant = response.data.results;
+      this.store.currentRestaurantId = this.restaurant.id;
       this.restaurantPic = this.restaurant.photo;
       this.store.jumbotronTitle = this.restaurant.name;
       this.store.jumbotronRestaurantDescription = this.restaurant.description;
       this.changeJumbotron();
 
-      localStorage.setItem("restaurant_id", this.restaurant.id);
+      if (!localStorage.getItem("restaurant_id")) {
+        localStorage.setItem("restaurant_id", this.store.currentRestaurantId);
+      } else if (this.store.currentRestaurantId != localStorage.getItem("restaurant_id") && this.store.cartItems.length > 0) {
+        this.store.isCartRemoveLayoverOn = true;
+      } else {
+        this.store.isCartRemoveLayoverOn = false;
+        localStorage.setItem("restaurant_id", this.store.currentRestaurantId);
+      }
     });
   },
 };

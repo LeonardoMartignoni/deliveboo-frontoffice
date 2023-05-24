@@ -29,6 +29,16 @@ export default {
 
       return totalItems;
     },
+
+    totalPrice() {
+      let totalPrice = 0;
+
+      this.store.cartItems.forEach((item) => {
+        totalPrice += item.itemPrice * item.itemQuantity;
+      });
+
+      return totalPrice;
+    },
   },
 };
 </script>
@@ -55,7 +65,7 @@ export default {
               <button class="btn btn-light rounded-pill px-4" @click="store.isCartOpen = !store.isCartOpen">
                 <i class="bi bi-cart2"></i>
               </button>
-              <!--  -->
+              <!-- Quantity badge -->
               <div v-if="totalItemAmount > 0" class="quantity-badge badge rounded-pill">
                 {{ totalItemAmount }}
               </div>
@@ -91,8 +101,7 @@ export default {
                     </div>
 
                     <!-- Checkout button -->
-                    <router-link :to="{ name: 'checkout' }" class="btn btn-primary text-white w-100 rounded-pill">Vai al pagamento</router-link>
-                    <!-- <button class="btn btn-primary text-white w-100 rounded-pill">Vai al pagamento</button> -->
+                    <router-link :to="{ name: 'checkout' }" class="btn btn-primary text-white w-100 rounded-pill">Checkout: €{{ totalPrice.toFixed(2).replace(".", ",") }}</router-link>
                   </div>
 
                   <div v-else class="cart-empty text-center p-3">
