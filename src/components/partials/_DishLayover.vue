@@ -25,18 +25,38 @@ export default {
     },
 
     addItemToCart() {
-      this.store.cartItems.push({
+      const newItem = {
         itemID: this.store.currentDish.id,
         itemImage: this.store.currentDish.photo,
         itemName: this.store.currentDish.name,
         itemPrice: this.store.currentDish.price,
         itemQuantity: this.dishCounter,
         itemTotalPrice: parseFloat((this.store.currentDish.price * this.dishCounter).toFixed(2)),
-      });
+      };
+
+      const existingItem = this.store.cartItems.find((item) => item.itemID === newItem.itemID);
+
+      if (existingItem) {
+        // L'elemento è già presente nel carrello
+        existingItem.itemQuantity += newItem.itemQuantity;
+        existingItem.itemTotalPrice += newItem.itemTotalPrice;
+      } else {
+        // L'elemento non è presente nel carrello, aggiungilo normalmente
+        this.store.cartItems.push(newItem);
+      }
+
+      const itemIndex = this.store.dishesId.findIndex((id) => id === newItem.itemID);
+
+      if (itemIndex !== -1) {
+        // L'elemento è già presente in dishesId
+        this.store.dishesQuantity[itemIndex] += newItem.itemQuantity;
+      } else {
+        // L'elemento non è presente in dishesId, aggiungilo normalmente
+        this.store.dishesId.push(newItem.itemID);
+        this.store.dishesQuantity.push(newItem.itemQuantity);
+      }
 
       // LocalStorage
-      this.store.dishesId.push(this.store.currentDish.id);
-      this.store.dishesQuantity.push(this.dishCounter);
       localStorage.setItem("dishes_id", JSON.stringify(this.store.dishesId));
       localStorage.setItem("quantity", JSON.stringify(this.store.dishesQuantity));
       localStorage.setItem("cartItems", JSON.stringify(this.store.cartItems));
