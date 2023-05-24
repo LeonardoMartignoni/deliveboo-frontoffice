@@ -79,13 +79,17 @@ export default {
                     <div class="card-body d-flex align-items-center h-100 ps-0">
                       <div class="card-details">
                         <h5 class="card-title m-0">{{ item.itemName }}</h5>
-                        <p class="card-text">Quantità: {{ item.itemQuantity }}</p>
+                        <p class="card-text m-0">Quantità: {{ item.itemQuantity }}</p>
                       </div>
 
-                      <!-- Item remove from cart -->
-                      <button class="btn border-0 ms-auto" @click="removeItemFromCart(index)">
-                        <i class="bi bi-trash3"></i>
-                      </button>
+                      <div class="item-price-delete d-flex align-items-center ms-auto">
+                        <span class="text-primary fw-bold me-2">€{{ item.itemTotalPrice.toFixed(2).replace(".", ",") }}</span>
+
+                        <!-- Item remove from cart -->
+                        <button class="btn border-0 ms-auto" @click="removeItemFromCart(index)">
+                          <i class="bi bi-trash3"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
