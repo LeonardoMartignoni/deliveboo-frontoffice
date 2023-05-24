@@ -59,7 +59,7 @@ export default {
     transform: translateY(10%);
     & > img {
       margin-top: auto;
-      max-width: 80%;
+      height: 44vh;
     }
 
     .title-menu {
