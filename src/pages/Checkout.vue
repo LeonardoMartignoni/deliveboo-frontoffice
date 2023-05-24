@@ -25,6 +25,15 @@ export default {
     submitForm() {
       axios.post("http://127.0.0.1:8000/api/order", this.formData);
     },
+
+    removeItemFromCart(index) {
+      this.store.dishesId.splice(index, 1);
+      this.store.dishesQuantity.splice(index, 1);
+      this.store.cartItems.splice(index, 1);
+      localStorage.setItem("dishes_id", JSON.stringify(this.store.dishesId));
+      localStorage.setItem("quantity", JSON.stringify(this.store.dishesQuantity));
+      localStorage.setItem("cartItems", JSON.stringify(this.store.cartItems));
+    },
   },
 
   mounted() {
@@ -57,18 +66,27 @@ export default {
       <div class="row mt-5 gx-4">
         <!-- Box prodotti nel carrello -->
         <div class="col-6">
-          <div class="form-content border p-3 h-100">
-            <h3>Il tuo Ordine</h3>
+          <div class="form-content border p-4 h-100 rounded-3">
+            <h3>Il tuo ordine</h3>
 
-            <div v-for="item in store.cartItems" class="card mb-3">
-              <div class="row">
-                <div class="col-md-4">
-                  <img :src="item.itemImage" class="rounded-start" alt="image" />
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ item.itemName }}</h5>
-                    <p class="card-text">Pezzi: {{ item.itemQuantity }}</p>
+            <div class="order-items-content d-flex flex-column">
+              <div v-for="(item, index) in store.cartItems" class="card mb-3">
+                <div class="row">
+                  <div class="col-md-4">
+                    <img :src="item.itemImage" class="rounded-start" alt="image" />
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body d-flex align-items-center h-100 ps-0">
+                      <div class="card-details">
+                        <h5 class="card-title m-0">{{ item.itemName }}</h5>
+                        <p class="card-text">Quantità: {{ item.itemQuantity }}</p>
+                      </div>
+
+                      <!-- Item remove from cart -->
+                      <button class="btn border-0 ms-auto" @click="removeItemFromCart(index)">
+                        <i class="bi bi-trash3"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -78,7 +96,7 @@ export default {
 
         <!-- Box form dati utente -->
         <div class="col-6">
-          <div class="form-content border p-3">
+          <div class="form-content border p-4 rounded-3">
             <h3>Inserisci i dati per la consegna</h3>
             <form method="POST" @submit.prevent="submitForm">
               <div class="mb-3">
@@ -125,8 +143,18 @@ export default {
 @import "../styles/partials/variables";
 
 img {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+}
+
+.order-items-content {
+  overflow-x: hidden;
+  max-height: 500px;
+}
+
+.card-text {
+  font-size: 0.9rem;
 }
 
 .button {
