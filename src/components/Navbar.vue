@@ -66,7 +66,7 @@ export default {
                 <i class="bi bi-cart2"></i>
               </button>
               <!-- Quantity badge -->
-              <div v-if="totalItemAmount > 0" class="quantity-badge badge rounded-pill">
+              <div v-if="totalItemAmount > 0" class="quantity-badge badge rounded-pill bg-primary">
                 {{ totalItemAmount }}
               </div>
 
@@ -144,14 +144,11 @@ export default {
 }
 
 .quantity-badge {
-  background-color: darkorchid;
-  color: white;
-  text-align: center;
-  border-radius: 5px;
+  border: 2px solid white;
   position: absolute;
   top: -8px;
   right: -8px;
-  width: 1.5rem;
+  min-width: 1.5rem;
   padding: 2px;
 }
 
