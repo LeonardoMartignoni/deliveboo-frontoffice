@@ -101,7 +101,7 @@ export default {
                     </div>
 
                     <!-- Checkout button -->
-                    <router-link :to="{ name: 'checkout' }" class="btn btn-primary text-white w-100 rounded-pill">Checkout: €{{ totalPrice.toFixed(2).replace(".", ",") }}</router-link>
+                    <router-link :to="{ name: 'checkout' }" class="btn btn-primary text-white w-100 rounded-pill mt-3">Checkout: €{{ totalPrice.toFixed(2).replace(".", ",") }}</router-link>
                   </div>
 
                   <div v-else class="cart-empty text-center p-3">
@@ -131,6 +131,11 @@ export default {
   right: 0;
   background-color: white;
   box-shadow: 0 0px 50px -12px rgba($color: #000000, $alpha: 0.25);
+
+  .cart-items-list {
+    max-height: 350px;
+    overflow: auto;
+  }
 
   .cart-image {
     width: 3rem;
