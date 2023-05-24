@@ -76,8 +76,8 @@ export default {
                   <h6 class="fw-bold p-3 m-0">Carrello</h6>
                   <hr class="m-0" />
 
-                  <div v-if="store.cartItems.length > 0" class="p-3">
-                    <div class="cart-items-list">
+                  <div v-if="store.cartItems.length > 0">
+                    <div class="cart-items-list m-3">
                       <div v-for="(item, index) in store.cartItems" class="cart-item d-flex">
                         <!-- Item image -->
                         <img :src="item.itemImage" class="cart-image img-fluid" />
@@ -100,8 +100,10 @@ export default {
                       </div>
                     </div>
 
-                    <!-- Checkout button -->
-                    <router-link :to="{ name: 'checkout' }" class="btn btn-primary text-white w-100 rounded-pill mt-3">Checkout: €{{ totalPrice.toFixed(2).replace(".", ",") }}</router-link>
+                    <div class="p-3 pt-0">
+                      <!-- Checkout button -->
+                      <router-link :to="{ name: 'checkout' }" class="btn btn-primary text-white w-100 rounded-pill">Checkout: €{{ totalPrice.toFixed(2).replace(".", ",") }}</router-link>
+                    </div>
                   </div>
 
                   <div v-else class="cart-empty text-center p-3">
@@ -143,7 +145,7 @@ export default {
     object-fit: cover;
   }
 
-  .cart-item {
+  .cart-item:not(:last-child) {
     margin-bottom: 1rem;
   }
 }
