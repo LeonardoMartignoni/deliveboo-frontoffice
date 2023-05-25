@@ -7,6 +7,9 @@ export default {
   data() {
     return {
       store,
+
+      isLoading: false,
+
       types: [],
       restaurants: [],
 
@@ -16,6 +19,8 @@ export default {
 
   methods: {
     fetchRestaurants(endpoint = null) {
+      this.isLoading = true;
+
       if (!endpoint) endpoint = "http://127.0.0.1:8000/api/restaurants";
       let params = {};
 
@@ -26,13 +31,16 @@ export default {
       axios.get(endpoint, { params }).then((response) => {
         this.restaurants = response.data.results.data;
         this.restaurants.pages = response.data.results.links;
+        this.isLoading = false;
       });
     },
 
     fetchTypes() {
+      this.isLoading = true;
+
       axios.get("http://127.0.0.1:8000/api/types").then((response) => {
-        // console.log(response)
         this.types = response.data.results;
+        this.isLoading = false;
       });
     },
   },
@@ -42,7 +50,6 @@ export default {
     this.fetchTypes();
 
     this.store.currentRestaurantId = "";
-    // this.store.cartItems = [];
   },
 };
 </script>
@@ -74,8 +81,7 @@ export default {
               <div class="row">
                 <div class="col-6 col-sm-3 col-lg-12" v-for="typology in types">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" :value="typology.id" :id="typology.id"
-                      v-model="selectedTypes" @change="fetchRestaurants()" />
+                    <input class="form-check-input" type="checkbox" :value="typology.id" :id="typology.id" v-model="selectedTypes" @change="fetchRestaurants()" />
                     <label class="form-check-label" :for="typology.id"> {{ typology.name }} </label>
                   </div>
                 </div>
@@ -85,7 +91,11 @@ export default {
         </div>
 
         <!-- Restaurants List -->
-        <div class="col-12 col-lg-9">
+        <div class="col-12 col-lg-9 position-relative">
+          <div v-if="isLoading" class="driver-loader position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-start">
+            <img src="/images/loading-delivery.gif" alt="Loading" />
+          </div>
+
           <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gy-4">
             <div v-for="restaurant in restaurants" class="col">
               <div class="border border-1 custom-border h-100 d-flex flex-column">
@@ -99,8 +109,7 @@ export default {
                       {{ typology.name }}
                     </span>
                   </div>
-                  <router-link :to="{ name: 'menu-detail', params: { id: restaurant.id } }"
-                    class="btn btn-primary rounded-pill text-white w-100 mt-auto mb-0">Menù</router-link>
+                  <router-link :to="{ name: 'menu-detail', params: { id: restaurant.id } }" class="btn btn-primary rounded-pill text-white w-100 mt-auto mb-0">Menù</router-link>
                 </div>
               </div>
             </div>
@@ -111,10 +120,16 @@ export default {
       <nav class="d-flex" aria-label="restaurants pagination">
         <ul class="pagination ms-auto my-3">
           <li v-for="page in restaurants.pages" class="page-item">
-            <button type="button" class="page-link" @click="fetchRestaurants(page.url)" :class="{
-              disabled: !page.url,
-              active: page.active,
-            }" v-html="page.label"></button>
+            <button
+              type="button"
+              class="page-link"
+              @click="fetchRestaurants(page.url)"
+              :class="{
+                disabled: !page.url,
+                active: page.active,
+              }"
+              v-html="page.label"
+            ></button>
           </li>
         </ul>
       </nav>
@@ -124,6 +139,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/partials/variables";
+
+.driver-loader {
+  padding: inherit;
+  background-color: rgba($color: #ffffff, $alpha: 1);
+}
 
 .custom-border {
   border-radius: 5px;

@@ -21,6 +21,8 @@ export default {
         quantity: localStorage.getItem("quantity"),
         nonce: "",
       },
+
+      isLoading: false,
     };
   },
 
@@ -31,9 +33,11 @@ export default {
         .then((response) => {
           this.errors = [];
           this.$router.push({ name: "order-complete" });
+          this.isLoading = false;
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
+          this.isLoading = false;
         });
     },
 
@@ -59,13 +63,14 @@ export default {
       },
       (err, instance) => {
         button.addEventListener("click", () => {
+          this.isLoading = true;
           instance.requestPaymentMethod((err, payload) => {
             if (err) {
               // Gestisci l'errore durante la richiesta del metodo di pagamento
               console.error(err);
+              this.isLoading = false;
               return;
             }
-
             // Aggiungi il campo 'nonce' al formData
             this.formData.nonce = payload.nonce;
 
@@ -127,7 +132,11 @@ export default {
         </div>
 
         <!-- Box form dati utente -->
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 position-relative">
+          <div v-if="isLoading" class="driver-loader position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-start">
+            <img src="/images/loading-delivery.gif" alt="Loading" />
+          </div>
+
           <div class="form-content border rounded-3">
             <div class="form-title p-3">
               <h3 class="m-0">Inserisci i dati per la consegna</h3>
@@ -197,6 +206,16 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/partials/variables";
+
+.driver-loader {
+  padding: inherit;
+  background-color: rgba($color: #ffffff, $alpha: 1);
+  z-index: 100;
+  & > img {
+    object-fit: contain;
+    width: 50%;
+  }
+}
 
 img {
   width: 100%;

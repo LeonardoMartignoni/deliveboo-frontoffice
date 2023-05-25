@@ -8,6 +8,8 @@ export default {
       store,
       restaurant: {},
       restaurantPic: null,
+
+      isLoading: false,
     };
   },
 
@@ -22,6 +24,8 @@ export default {
   },
 
   created() {
+    this.isLoading = true;
+
     axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
       this.restaurant = response.data.results;
       this.store.currentRestaurantId = this.restaurant.id;
@@ -38,6 +42,7 @@ export default {
         this.store.isCartRemoveLayoverOn = false;
         localStorage.setItem("restaurant_id", this.store.currentRestaurantId);
       }
+      this.isLoading = false;
     });
   },
 };
@@ -46,7 +51,11 @@ export default {
 <template>
   <div class="container my-5">
     <div class="row mt-5">
-      <div class="col-12">
+      <div class="col-12 position-relative">
+        <div v-if="isLoading" class="driver-loader position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-start">
+          <img src="/images/loading-delivery.gif" alt="Loading" />
+        </div>
+
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 gy-4">
           <div v-for="dish in restaurant.dishes" class="col">
             <button @click="emitDish(dish)" class="btn text-start p-0 border border-1 custom-border h-100 d-flex flex-column w-100">
@@ -73,6 +82,10 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/partials/variables";
 
+.driver-loader {
+  padding: inherit;
+  background-color: rgba($color: #ffffff, $alpha: 1);
+}
 .custom-border {
   border-radius: 5px;
 }
