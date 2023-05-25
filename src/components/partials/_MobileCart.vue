@@ -170,5 +170,6 @@ export default {
   top: -8px;
   right: -8px;
   min-width: 1.5rem;
+  font-size: 0.8rem;
 }
 </style>
