@@ -30,7 +30,7 @@ export default {
         .post("http://127.0.0.1:8000/api/order", this.formData)
         .then((response) => {
           this.errors = [];
-          this.$router.push({ name: "home" });
+          this.$router.push({ name: "order-complete" });
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
