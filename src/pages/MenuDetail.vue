@@ -51,7 +51,7 @@ export default {
 <template>
   <div class="container my-5">
     <div class="row mt-5">
-      <div class="col-12 position-relative">
+      <div class="col-12 position-relative data-col">
         <div v-if="isLoading" class="driver-loader position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-start">
           <img src="/images/loading-delivery.gif" alt="Loading" />
         </div>
@@ -81,6 +81,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/partials/variables";
+
+.data-col {
+  min-height: 250px;
+}
 
 .driver-loader {
   padding: inherit;
