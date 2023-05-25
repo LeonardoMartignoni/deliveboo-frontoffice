@@ -21,9 +21,6 @@ export default {
       this.store.cartItems = [];
       this.store.dishesId = [];
       this.store.dishesQuantity = [];
-
-      localStorage.setItem("restaurant_id", this.store.currentRestaurantId);
-      this.store.isCartRemoveLayoverOn = false;
     },
   },
 

@@ -88,10 +88,10 @@ export default {
             <h5>{{ info.title }}</h5>
             <ul class="list-group" v-for="subtitle in info.subtitles">
               <li class="my-1">
-                <a v-if="subtitle.text" class="text-reset text-decoration-none" :href="subtitle.link">
+                <a v-if="subtitle.text" class="text-reset" :href="subtitle.link">
                   {{ subtitle.text }}
                 </a>
-                <a v-else class="text-reset text-decoration-none" :href="subtitle.link">
+                <a v-else class="text-reset" :href="subtitle.link">
                   <img :src="subtitle.image" />
                 </a>
               </li>
@@ -105,8 +105,11 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.list-group>li:hover {
-  text-decoration: underline;
+.list-group a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .footer-content {
