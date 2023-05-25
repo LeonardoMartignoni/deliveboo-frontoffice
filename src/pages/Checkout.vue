@@ -7,6 +7,8 @@ export default {
     return {
       store,
 
+      errors: [],
+
       formData: {
         restaurant_id: localStorage.getItem("restaurant_id"),
         customer_name: "",
@@ -23,7 +25,14 @@ export default {
 
   methods: {
     submitForm() {
-      axios.post("http://127.0.0.1:8000/api/order", this.formData);
+      axios
+        .post("http://127.0.0.1:8000/api/order", this.formData)
+        .then((response) => {
+          this.errors = [];
+        })
+        .catch((errors) => {
+          this.errors = errors.response.data.errors;
+        });
     },
 
     removeItemFromCart(index) {
@@ -117,27 +126,45 @@ export default {
             <form class="p-3" method="POST" @submit.prevent="submitForm">
               <div class="mb-3">
                 <label for="customer_name" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="customer_name" v-model="formData.customer_name" />
+                <input type="text" class="form-control" :class="errors.customer_name ? 'is-invalid' : ''" id="customer_name" v-model="formData.customer_name" />
+                <div v-if="errors.customer_name" class="invalid-feedback">
+                  {{ errors.customer_name[0] }}
+                </div>
               </div>
               <div class="mb-3">
                 <label for="customer_surname" class="form-label">Cognome</label>
-                <input type="text" class="form-control" id="customer_surname" v-model="formData.customer_surname" />
+                <input type="text" class="form-control" :class="errors.customer_surname ? 'is-invalid' : ''" id="customer_surname" v-model="formData.customer_surname" />
+                <div v-if="errors.customer_surname" class="invalid-feedback">
+                  {{ errors.customer_surname[0] }}
+                </div>
               </div>
               <div class="mb-3">
                 <label for="customer_address" class="form-label">Indirizzo</label>
-                <input type="text" class="form-control" id="customer_address" v-model="formData.customer_address" />
+                <input type="text" class="form-control" :class="errors.customer_address ? 'is-invalid' : ''" id="customer_address" v-model="formData.customer_address" />
+                <div v-if="errors.customer_address" class="invalid-feedback">
+                  {{ errors.customer_address[0] }}
+                </div>
               </div>
               <div class="mb-3">
                 <label for="customer_mail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="customer_mail" v-model="formData.customer_mail" />
+                <input type="email" class="form-control" :class="errors.customer_mail ? 'is-invalid' : ''" id="customer_mail" v-model="formData.customer_mail" />
+                <div v-if="errors.customer_mail" class="invalid-feedback">
+                  {{ errors.customer_mail[0] }}
+                </div>
               </div>
               <div class="mb-3">
                 <label for="customer_phone_number" class="form-label">Telefono</label>
-                <input type="text" class="form-control" id="customer_phone_number" v-model="formData.customer_phone_number" maxlength="11" />
+                <input type="text" class="form-control" :class="errors.customer_phone_number ? 'is-invalid' : ''" id="customer_phone_number" v-model="formData.customer_phone_number" maxlength="11" />
+                <div v-if="errors.customer_phone_number" class="invalid-feedback">
+                  {{ errors.customer_phone_number[0] }}
+                </div>
               </div>
               <div class="mb-3">
                 <label for="note" class="form-label">Note</label>
-                <textarea type="text" class="form-control" id="note" rows="3" v-model="formData.note"></textarea>
+                <textarea type="text" class="form-control" :class="errors.note ? 'is-invalid' : ''" id="note" rows="3" v-model="formData.note"></textarea>
+                <div v-if="errors.note" class="invalid-feedback">
+                  {{ errors.note[0] }}
+                </div>
               </div>
 
               <button type="submit" class="btn btn-primary w-100 rounded-pill text-white">Invia l'ordine</button>
