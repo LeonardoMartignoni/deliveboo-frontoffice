@@ -33,7 +33,6 @@ export default {
         .then((response) => {
           this.errors = [];
           this.$router.push({ name: "order-complete" });
-          this.isLoading = false;
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
@@ -74,12 +73,14 @@ export default {
         selector: "#dropin-container",
       },
       (err, instance) => {
-        button.addEventListener("click", () => {
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
           this.isLoading = true;
           instance.requestPaymentMethod((err, payload) => {
             if (err) {
               // Gestisci l'errore durante la richiesta del metodo di pagamento
               console.error(err);
+              this.submitForm();
               this.isLoading = false;
               return;
             }
@@ -144,7 +145,7 @@ export default {
             <hr class="m-0 mt-auto" />
 
             <h3 class="text-end mb-0 p-3 fw-regular">
-              Totale: <span class="text-primary fw-bold">€{{ totalPrice }}</span>
+              Totale: <span class="text-primary fw-bold">€{{ totalPrice.toFixed(2).replace(".", ",") }}</span>
             </h3>
           </div>
         </div>
@@ -162,7 +163,7 @@ export default {
 
             <hr class="m-0" />
 
-            <form class="p-3" method="POST" @submit.prevent="submitForm">
+            <form class="p-3" method="POST">
               <div class="mb-3">
                 <label for="customer_name" class="form-label">Nome</label>
                 <input type="text" class="form-control" :class="errors.customer_name ? 'is-invalid' : ''" id="customer_name" v-model="formData.customer_name" />
