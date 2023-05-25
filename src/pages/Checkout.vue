@@ -51,6 +51,18 @@ export default {
     },
   },
 
+  computed: {
+    totalPrice() {
+      let totalPrice = 0;
+
+      this.store.cartItems.forEach((item) => {
+        totalPrice += item.itemPrice * item.itemQuantity;
+      });
+
+      return totalPrice;
+    },
+  },
+
   mounted() {
     this.store.isCartOpen = false;
 
@@ -90,9 +102,9 @@ export default {
       <div class="row mt-2 gx-4 gy-4 gy-lg-0">
         <!-- Box prodotti nel carrello -->
         <div class="col-12 col-lg-6">
-          <div class="form-content border h-100 rounded-3">
+          <div class="form-content border h-100 rounded-3 d-flex flex-column">
             <div class="form-title p-3">
-              <h3 class="m-0">Il tuo ordine</h3>
+              <h3 class="m-0 fw-bold">Il tuo ordine</h3>
             </div>
 
             <hr class="m-0" />
@@ -128,6 +140,12 @@ export default {
             <div v-else class="p-3">
               <p class="m-0">Nessun prodotto nel carrello.</p>
             </div>
+
+            <hr class="m-0 mt-auto" />
+
+            <h3 class="text-end mb-0 p-3 fw-regular">
+              Totale: <span class="text-primary fw-bold">€{{ totalPrice }}</span>
+            </h3>
           </div>
         </div>
 
@@ -139,7 +157,7 @@ export default {
 
           <div class="form-content border rounded-3">
             <div class="form-title p-3">
-              <h3 class="m-0">Inserisci i dati per la consegna</h3>
+              <h3 class="m-0 fw-bold">Inserisci i dati per la consegna</h3>
             </div>
 
             <hr class="m-0" />
