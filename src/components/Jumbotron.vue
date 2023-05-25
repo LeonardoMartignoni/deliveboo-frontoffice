@@ -24,7 +24,6 @@ export default {
           <div class="jumbotron-content d-flex justify-content-center text-white position-relative flex-column">
             <div v-if="store.jumbotronTitle == store.jumbotronDefaultTitle">
               <h1 class="fw-light" v-html="title"></h1>
-              <a href="#our-restaurants" class="btn btn-outline-light rounded-pill w-25 mt-3">Ordina!</a>
             </div>
             <div v-else class="d-flex flex-column">
               <span class="text-uppercase title-menu">Menù</span>
