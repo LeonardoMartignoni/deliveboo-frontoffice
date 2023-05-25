@@ -19,6 +19,7 @@ export default {
         note: "",
         dishes_id: localStorage.getItem("dishes_id"),
         quantity: localStorage.getItem("quantity"),
+        nonce: "",
       },
     };
   },
@@ -29,9 +30,10 @@ export default {
         .post("http://127.0.0.1:8000/api/order", this.formData)
         .then((response) => {
           this.errors = [];
+          this.$router.push({ name: "home" });
         })
-        .catch((errors) => {
-          this.errors = errors.response.data.errors;
+        .catch((error) => {
+          this.errors = error.response.data.errors;
         });
     },
 
@@ -52,13 +54,23 @@ export default {
 
     braintree.dropin.create(
       {
-        authorization: "sandbox_pg55c8z5_bbhn9fzx5pnfp46z",
+        authorization: "sandbox_kt4pfddf_7dzbnc5wqqzwztpw",
         selector: "#dropin-container",
       },
-      function (err, instance) {
-        button.addEventListener("click", function () {
-          instance.requestPaymentMethod(function (err, payload) {
-            // Submit payload.nonce to your server
+      (err, instance) => {
+        button.addEventListener("click", () => {
+          instance.requestPaymentMethod((err, payload) => {
+            if (err) {
+              // Gestisci l'errore durante la richiesta del metodo di pagamento
+              console.error(err);
+              return;
+            }
+
+            // Aggiungi il campo 'nonce' al formData
+            this.formData.nonce = payload.nonce;
+
+            // Invia i dati dell'ordine al server
+            this.submitForm();
           });
         });
       }
@@ -167,16 +179,17 @@ export default {
                 </div>
               </div>
 
-              <button type="submit" class="btn btn-primary w-100 rounded-pill text-white">Invia l'ordine</button>
+              <div id="dropin-container"></div>
+              <button id="submit-button" type="submit" class="btn btn-primary w-100 rounded-pill text-white">Invia l'ordine</button>
             </form>
           </div>
         </div>
 
         <!-- Box Pagamento -->
-        <div class="col-12">
+        <!-- <div class="col-12">
           <div id="dropin-container"></div>
           <button id="submit-button" class="button button--small button--green">Purchase</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
