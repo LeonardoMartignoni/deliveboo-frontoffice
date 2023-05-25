@@ -8,6 +8,7 @@ import FooterDetails from "./components/FooterDetails.vue";
 import MenuLayover from "./components/partials/_MenuLayover.vue";
 import DishLayover from "./components/partials/_DishLayover.vue";
 import CartRemoveLayover from "./components/partials/_CartRemoveLayover.vue";
+import MobileCart from "./components/partials/_MobileCart.vue";
 
 export default {
   data() {
@@ -26,6 +27,7 @@ export default {
     MenuLayover,
     DishLayover,
     CartRemoveLayover,
+    MobileCart,
   },
 
   methods: {
@@ -77,6 +79,8 @@ export default {
   <MenuLayover v-if="isMenuOn" @toggle-menu="toggleMenu()" />
   <DishLayover v-if="store.isDishLayoverOn" />
   <CartRemoveLayover v-if="store.isCartRemoveLayoverOn" />
+
+  <MobileCart />
 
   <Navbar class="navbar-component" @toggle-menu="toggleMenu()" />
   <Jumbotron :jumbotronPicPath="jumbotronPicPath" :title="store.jumbotronTitle" />
