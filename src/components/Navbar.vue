@@ -56,10 +56,10 @@ export default {
         <div class="collapse navbar-collapse flex-grow-0">
           <ul class="list-group d-flex flex-row gap-3">
             <li>
-              <a href="http://127.0.0.1:8000/login" class="btn btn-light rounded-pill px-4">Accedi</a>
+              <a href="http://127.0.0.1:8000/login" target="_blank" class="btn btn-light rounded-pill px-4">Accedi</a>
             </li>
             <li>
-              <a href="http://127.0.0.1:8000/register" class="btn btn-light rounded-pill px-4">Registrati</a>
+              <a href="http://127.0.0.1:8000/register" target="_blank" class="btn btn-light rounded-pill px-4">Registrati</a>
             </li>
             <li class="position-relative">
               <button class="btn btn-light rounded-pill px-4" @click="store.isCartOpen = !store.isCartOpen">

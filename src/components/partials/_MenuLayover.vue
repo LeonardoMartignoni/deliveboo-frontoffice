@@ -32,13 +32,13 @@ export default {
 
           <ul class="list-group d-flex flex-column">
             <li>
-              <a href="#" class="btn btn-primary text-white rounded-pill px-4 py-3 w-100">Accedi</a>
+              <a href="#" target="_blank" class="btn btn-primary text-white rounded-pill px-4 py-3 w-100">Accedi</a>
             </li>
             <li>
               <p class="text-muted mb-1 mt-5">Non sei ancora registrato?</p>
             </li>
             <li>
-              <a href="#" class="btn btn-outline-primary rounded-pill px-4 py-3 w-100">Registrati</a>
+              <a href="#" target="_blank" class="btn btn-outline-primary rounded-pill px-4 py-3 w-100">Registrati</a>
             </li>
           </ul>
         </div>
