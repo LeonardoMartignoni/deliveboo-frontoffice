@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/YJ8erBr.png" />
+<img src="https://i.imgur.com/kKxlvJ8.png" />
 
 Benvenuto in Deliveboo! Questa è un'applicazione web che permette agli utenti di selezionare e ordinare cibo dai ristoranti disponibili. Gli utenti possono esplorare una vasta selezione di ristoranti, accedere ai loro menù, scegliere i piatti desiderati e effettuare ordini comodamente da casa. Il progetto comprende sia il front-end che il back-end per gestire le funzionalità principali dell'applicazione.
 
