@@ -33,7 +33,7 @@ Per installare e avviare il progetto in locale, segui questi passaggi:
 5. Esegui il comando `npm run dev` per avviare l'applicazione in modalità di sviluppo.
 6. Apri il tuo browser e visita l'URL fornito nel terminale per visualizzare Deliveboo.
 
-Assicurati di avere un server back-end funzionante e configurato correttamente per gestire le chiamate API e il salvataggio dei dati degli ordini. Il codice sorgente del back-end è disponibile nella seguente repository: [LINK_BACK].
+Assicurati di avere un server back-end funzionante e configurato correttamente per gestire le chiamate API e il salvataggio dei dati degli ordini. Il codice sorgente del back-end è disponibile nella seguente repository: https://github.com/LeonardoMartignoni/deliveboo-backoffice
 
 Modifica la configurazione di Axios per puntare al corretto endpoint API nel tuo server back-end.
 
